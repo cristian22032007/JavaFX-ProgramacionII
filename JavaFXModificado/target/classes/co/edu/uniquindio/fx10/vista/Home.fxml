@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/" fx:controller="co.edu.uniquindio.fx10.controlador.HomeController">
+
+    <padding>
+        <Insets bottom="50" left="50" right="50" top="50" />
+    </padding>
+
+    <!-- Título -->
+    <Label text="Dashboard" textFill="#170202">
+        <font>
+            <Font name="Constantia" size="32.0" />
+        </font>
+    </Label>
+
+    <!-- Botones -->
+    <VBox alignment="CENTER" spacing="15">
+        <Button fx:id="BtnCrearProducto" onAction="#onBtnCrearProducto" prefHeight="55.0" prefWidth="291.0" text="Crear Producto" textFill="#8a0e0e">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Button>
+
+        <Button fx:id="BtnVerLista" onAction="#onBtnVerLista" prefHeight="55.0" prefWidth="290.0" text="Ver Lista de Productos" textFill="#8a0e0e">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Button>
+    </VBox>
+
+</VBox>
