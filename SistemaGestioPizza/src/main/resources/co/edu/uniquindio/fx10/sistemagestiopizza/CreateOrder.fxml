@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.fx10.sistemagestiopizza.controller.CreateOrder"
+            style="-fx-background-color: #f5f5f5;">
+
+    <!-- Encabezado -->
+    <top>
+        <VBox style="-fx-background-color: #FF9800; -fx-padding: 20;">
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Button fx:id="btnVolver"
+                        text="← Volver"
+                        onAction="#volverAlInicio"
+                        style="-fx-background-color: white;
+                               -fx-text-fill: #FF9800;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 5;
+                               -fx-cursor: hand;">
+                    <padding>
+                        <Insets top="8" right="15" bottom="8" left="15"/>
+                    </padding>
+                </Button>
+
+                <Label text="Crear Nueva Orden"
+                       textFill="white"
+                       style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Contenido principal -->
+    <center>
+        <VBox spacing="25" style="-fx-background-color: white; -fx-padding: 30;">
+
+            <!-- Sección: Seleccionar tipo de comida (FACTORY) -->
+            <VBox spacing="10">
+                <Label text="1. Selecciona tu comida base:"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Tipo:" style="-fx-font-size: 14px;"/>
+                    <ComboBox fx:id="cboTipoComida"
+                              prefWidth="200"
+                              style="-fx-font-size: 14px;"/>
+                </HBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Region style="-fx-background-color: #e0e0e0; -fx-pref-height: 2;"/>
+
+            <!-- Sección: Agregar extras (DECORATOR) -->
+            <VBox spacing="15">
+                <Label text="2. Agrega extras (opcional):"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <VBox spacing="10">
+                    <CheckBox fx:id="chkExtraQueso"
+                              text="Extra Queso (+$1.50)"
+                              style="-fx-font-size: 14px;"/>
+
+                    <CheckBox fx:id="chkExtraSalsa"
+                              text="Extra Salsa (+$0.75)"
+                              style="-fx-font-size: 14px;"/>
+
+                    <CheckBox fx:id="chkBebida"
+                              text="Bebida (+$2.00)"
+                              style="-fx-font-size: 14px;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Separador -->
+            <Region style="-fx-background-color: #e0e0e0; -fx-pref-height: 2;"/>
+
+            +
+            <!-- Botón para agregar orden -->
+            <Button fx:id="btnAgregarOrden"
+                    text="✓ Agregar Orden"
+                    onAction="#agregarOrden"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #4CAF50;
+                           -fx-text-fill: white;
+                           -fx-font-size: 16px;
+                           -fx-font-weight: bold;
+                           -fx-background-radius: 8;
+                           -fx-cursor: hand;">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+            </Button>
+
+        </VBox>
+    </center>
+
+</BorderPane>
