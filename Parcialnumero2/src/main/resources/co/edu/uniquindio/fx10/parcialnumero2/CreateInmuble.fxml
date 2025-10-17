@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+        <BorderPane xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="co.edu.uniquindio.fx10.parcialnumero2.controller.RegistrarInmueble"
+        style="-fx-background-color: #f5f5f5;">
+
+        <!-- Encabezado -->
+<top>
+    <VBox style="-fx-background-color: #FF9800; -fx-padding: 20;">
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <Button fx:id="btnVolver"
+                    text="← Volver"
+                    onAction="#volverAlInicio"
+                    style="-fx-background-color: white;
+                               -fx-text-fill: #FF9800;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 5;
+                               -fx-cursor: hand;">
+                <padding>
+                    <Insets top="8" right="15" bottom="8" left="15"/>
+                </padding>
+            </Button>
+
+            <Label text="Registrar Inmueble"
+                   textFill="white"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </HBox>
+    </VBox>
+</top>
+
+        <!-- Contenido principal -->
+<center>
+<VBox spacing="25" style="-fx-background-color: white; -fx-padding: 30;">
+
+    <!-- Sección: Seleccionar tipo de comida (FACTORY) -->
+    <VBox spacing="10">
+        <Label text="1. Selecciona tipo inmueble:"
+               style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Tipo:" style="-fx-font-size: 14px;"/>
+            <ComboBox fx:id="cboTipoinmueble"
+                      prefWidth="200"
+                      style="-fx-font-size: 14px;"/>
+        </HBox>
+    </VBox>

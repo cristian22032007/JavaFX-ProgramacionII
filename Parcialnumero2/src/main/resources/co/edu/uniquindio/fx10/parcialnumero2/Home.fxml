@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="25" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.fx10.parcialnumero2.controller.SistemInmobiliaria">
+
+    <padding>
+        <Insets bottom="45" left="45" right="45" top="45" />
+    </padding>
+
+    <Label style="-fx-font-weight: bold" text="Inmobiliaria Crischo" textFill="#FF0000">
+        <font>
+            <Font name="Times New Roman" size="55.0" />
+        </font>
+    </Label>
+
+    <VBox alignment="CENTER" spacing="20">
+        <Button fx:id="BtnCreateInmueble" onAction="#onBtnCreateInmueble" prefHeight="55.0" prefWidth="291.0" text="Pedir Orden" textFill="#000000">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Button>
+
+        <Button fx:id="BtnSeeInmueble" onAction="#onBtnSeeInmueble" prefHeight="55.0" prefWidth="290.0" text="Ver Ordenes" textFill="#000000">
+            <font>
+                <Font name="System Bold" size="16" />
+            </font>
+        </Button>
+    </VBox>
+
+</VBox>
