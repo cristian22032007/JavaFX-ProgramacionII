@@ -12,6 +12,6 @@ public class DrinkDecorator extends OrderDecorator {
 
     @Override
     public double getCost() {
-        return + 2000.00;
+        return order.getCost() + 2000.00;
     }
 }

@@ -124,7 +124,7 @@ public class SeeOrder {
     @FXML
     private void onVolverMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/sistemagestiopizza/Home.fxml"));
             Parent home = loader.load();
             App.getPrimaryStage().getScene().setRoot(home);
         } catch (IOException e) {

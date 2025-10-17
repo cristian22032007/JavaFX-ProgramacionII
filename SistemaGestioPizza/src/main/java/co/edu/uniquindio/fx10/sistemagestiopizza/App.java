@@ -17,7 +17,7 @@ public class App extends Application {
             Parent root = loader.load();
 
             Scene scene = new Scene(root, 900, 600);
-
+            primaryStage = stage;
             primaryStage.setTitle("Sistema de Pedidos");
             primaryStage.setScene(scene);
             primaryStage.show();

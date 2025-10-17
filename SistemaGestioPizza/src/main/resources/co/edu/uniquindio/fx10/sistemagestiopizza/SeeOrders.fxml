@@ -34,7 +34,7 @@
     </top>
 
     <center>
-        <FlowPane fx:id="contenedorOrdenes"
+        <FlowPane fx:id="contentOrder"
                   hgap="15"
                   vgap="15"
                   style="-fx-background-color: #f5f5f5;">

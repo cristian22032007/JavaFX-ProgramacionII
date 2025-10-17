@@ -12,7 +12,7 @@ public class ExtraSauceDecorator extends OrderDecorator {
 
     @Override
     public double getCost() {
-        return + 500.00;
+        return order.getCost() + 500.00;
     }
 
 

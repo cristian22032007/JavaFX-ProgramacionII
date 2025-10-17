@@ -61,23 +61,34 @@
 
                 <VBox spacing="10">
                     <CheckBox fx:id="chkExtraQueso"
-                              text="Extra Queso (+$1.50)"
+                              text="Extra Queso (+$1500.00)"
                               style="-fx-font-size: 14px;"/>
 
                     <CheckBox fx:id="chkExtraSalsa"
-                              text="Extra Salsa (+$0.75)"
+                              text="Extra Salsa (+$500.00)"
                               style="-fx-font-size: 14px;"/>
 
                     <CheckBox fx:id="chkBebida"
-                              text="Bebida (+$2.00)"
+                              text="Bebida (+$2000.00)"
                               style="-fx-font-size: 14px;"/>
                 </VBox>
+                <Label text="3. Resumen de la orden:"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <Label fx:id="lblDescripcion"
+                       text="Descripción de la orden"
+                       wrapText="true"
+                       style="-fx-font-size: 14px; -fx-text-fill: #555;"/>
+
+                <Label fx:id="lblPrecioTotal"
+                       text=""
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
             </VBox>
 
             <!-- Separador -->
             <Region style="-fx-background-color: #e0e0e0; -fx-pref-height: 2;"/>
 
-            +
+
             <!-- Botón para agregar orden -->
             <Button fx:id="btnAgregarOrden"
                     text="✓ Agregar Orden"

@@ -120,18 +120,13 @@ public class CreateOrder {
         private void volverAlInicio() {
             try {
                 Parent inicio;
-                    if (homeSistem != null) {
-                // Si se abrió desde Home, volver a Home
-                         FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Home.fxml"));
-                        inicio = loader.load();
-                } else {
-                // Si se abrió desde Dashboard, volver a Dashboard
-                    FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Dashboard.fxml"));
-                     inicio = loader.load();
+                if (homeSistem != null) {
+                    // Si se abrió desde Home, volver a Home
+                    FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/sistemagestiopizza/Home.fxml"));
+                    inicio = loader.load();
+
+                App.getPrimaryStage().getScene().setRoot(inicio);
             }
-
-            App.getPrimaryStage().getScene().setRoot(inicio);
-
         } catch (IOException e) {
             mostrarAlerta("Error", "No se pudo volver al inicio", Alert.AlertType.ERROR);
             e.printStackTrace();
