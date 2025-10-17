@@ -75,7 +75,7 @@ public class SeeOrder {
 
             // Estilo de la caja
             caja.setStyle(
-                    "-fx-background-color: " + color.GRAY + ";" +
+                    "-fx-background-color: #BDBDBD;" +
                             "-fx-background-radius: 10;" +
                             "-fx-border-color: #000000;" +
                             "-fx-border-width: 1;" +
@@ -91,8 +91,13 @@ public class SeeOrder {
             Region separador1 = new Region();
             separador1.setPrefHeight(1);
             separador1.setStyle("-fx-background-color: #000000;");
+            // Separador
+            Region separador2 = new Region();
+            separador1.setPrefHeight(1);
+            separador1.setStyle("-fx-background-color: #000000;");
 
-            // Descripción completa (incluye base + decoradores)
+
+
             // El método getDescription() del decorator concatena todo
             Label lblDescripcion = new Label(orden.getDescription());
             lblDescripcion.setWrapText(true);
@@ -115,7 +120,7 @@ public class SeeOrder {
                     lblTitulo,
                     separador1,
                     lblDescripcion,
-                    separador1,
+                    separador2,
                     contenedorPrecio
             );
 
