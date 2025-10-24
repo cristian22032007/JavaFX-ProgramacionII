@@ -15,15 +15,15 @@ public class SistemInmobiliaria {
     private Button BtnSeeInmueble;
 
     @FXML
-    public void onBtnCreateInmueble() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("co.edu.uniquindio.fx10.parcialnumero2.CreateInmueble.fxml"));
+    private void onBtnCreateInmueble() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/fx10/parcialnumero2/CreateInmuble.fxml"));
         Parent root = loader.load();
         App.getPrimaryStage().getScene().setRoot(root);
     }
 
     @FXML
-    public void onBtnSeeInmueble() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("co.edu.unqiudio.fx10.parcialnumero2.SeeInmueble.fxml"));
+    private void onBtnSeeInmueble() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/fx10/parcialnumero2/SeeInmueble.fxml"));
         Parent root = loader.load();
         App.getPrimaryStage().getScene().setRoot(root);
     }

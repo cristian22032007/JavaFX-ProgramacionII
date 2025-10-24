@@ -117,26 +117,11 @@ public class CreateOrder {
             this.homeSistem = homeSistem;
         }
         @FXML
-        private void volverAlInicio() {
-            try {
-                Parent inicio;
-                if (homeSistem != null) {
-                    // Si se abrió desde Home, volver a Home
+        private void volverAlInicio() throws IOException {
+                    Parent inicio;
                     FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/sistemagestiopizza/Home.fxml"));
                     inicio = loader.load();
-
-                App.getPrimaryStage().getScene().setRoot(inicio);
+                    App.getPrimaryStage().getScene().setRoot(inicio);
             }
-        } catch (IOException e) {
-            mostrarAlerta("Error", "No se pudo volver al inicio", Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
-    }
-         private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
-            Alert alerta = new Alert(tipo);
-            alerta.setTitle(titulo);
-            alerta.setHeaderText(null);
-            alerta.setContentText(mensaje);
-            alerta.showAndWait();
-    }
-        }
+
+}

@@ -1,12 +1,8 @@
 package co.edu.uniquindio.fx10.parcialnumero2.model;
 
 public class LocalDecorator extends InmuebleDecorator {
-    public LocalDecorator(InmuebleIT inmueble) {
-        super(inmueble);
+    public LocalDecorator(Builder builder) {
+        super(builder);
     }
 
-    @Override
-    public String descripcion() {
-        return "Local" + inmueble.descripcion();
-    }
 }

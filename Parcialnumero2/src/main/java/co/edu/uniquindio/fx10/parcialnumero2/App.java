@@ -1,11 +1,10 @@
 package co.edu.uniquindio.fx10.parcialnumero2;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class App extends Application {
@@ -13,18 +12,22 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/fx10/parcialnumero2/Home.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 600, 600);
         primaryStage = stage;
-        primaryStage.setTitle("Hello!");
+        primaryStage.setTitle("Sistema de Registro de Inmuebles");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static Stage getPrimaryStage() {
+
+    public static Stage getPrimaryStage () {
         return primaryStage;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[]args){
         launch();
     }
 }

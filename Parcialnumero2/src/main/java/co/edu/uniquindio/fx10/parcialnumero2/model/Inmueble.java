@@ -1,23 +1,19 @@
 package co.edu.uniquindio.fx10.parcialnumero2.model;
 
-public class Inmueble implements InmuebleIT {
+
+public class Inmueble {
     private String tipo;
     private String ciudad;
     private int numeroHabitantes;
     private int numeroPisos;
     private double precio;
 
-    private Inmueble (Builder builder){
+    protected Inmueble (Builder builder){
         this.tipo = builder.tipo;
         this.ciudad = builder.ciudad;
         this.numeroHabitantes = builder.numeroHabitantes;
         this.numeroPisos = builder.numeroPisos;
         this.precio = builder.precio;
-    }
-
-    @Override
-    public String descripcion() {
-        return "verificada/o";
     }
 
     /**

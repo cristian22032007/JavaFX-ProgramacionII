@@ -12,7 +12,7 @@
 
     <!-- Encabezado -->
     <top>
-        <VBox style="-fx-background-color: #FF9800; -fx-padding: 20;">
+        <VBox style="-fx-background-color: #FF9800; -fx-padding: 30;">
             <HBox alignment="CENTER_LEFT" spacing="15">
                 <Button fx:id="btnVolver"
                         text="← Volver"
@@ -36,7 +36,7 @@
 
     <!-- Contenido principal -->
     <center>
-        <VBox spacing="25" style="-fx-background-color: white; -fx-padding: 30;">
+        <VBox spacing="20" style="-fx-background-color: white; -fx-padding: 30;">
 
             <!-- Sección: Seleccionar tipo de comida (FACTORY) -->
             <VBox spacing="10">

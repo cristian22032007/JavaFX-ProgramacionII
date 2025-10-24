@@ -2,7 +2,6 @@ package co.edu.uniquindio.fx10.parcialnumero2.controller;
 
 import co.edu.uniquindio.fx10.parcialnumero2.App;
 import co.edu.uniquindio.fx10.parcialnumero2.model.Inmueble;
-import co.edu.uniquindio.fx10.parcialnumero2.model.InmuebleIT;
 import co.edu.uniquindio.fx10.parcialnumero2.repository.Inmobiliaria;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,8 +31,6 @@ public class VerInmuebles   {
 
     @FXML
     private TableColumn<Inmueble, Double> colPrecio;
-    @FXML
-    private TableColumn<Inmueble, String> colDescripcion;
 
 
     @FXML
@@ -55,7 +52,7 @@ public class VerInmuebles   {
         colNumeroHabitantes.setCellValueFactory(new PropertyValueFactory<>("numeroHabitantes"));
         colNumeroPisos.setCellValueFactory(new PropertyValueFactory<>("numeroPisos"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+
 
         // Formatear la columna de precio
         colPrecio.setCellFactory(column -> new TableCell<Inmueble, Double>() {
@@ -84,15 +81,11 @@ public class VerInmuebles   {
 }
 
     @FXML
-    private void onVolverMenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/vista/Home.fxml"));
+    private void onVolverMenu() throws IOException{
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/parcialnumero2/Home.fxml"));
             Parent home = loader.load();
             App.getPrimaryStage().getScene().setRoot(home);
-        } catch (IOException e) {
-            mostrarAlerta("Error", "No se pudo volver al menú principal", Alert.AlertType.ERROR);
-            e.printStackTrace();
-        }
+
     }
 
     /**

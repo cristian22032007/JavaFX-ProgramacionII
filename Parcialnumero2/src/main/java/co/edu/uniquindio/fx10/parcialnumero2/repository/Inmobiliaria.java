@@ -11,6 +11,11 @@ public class Inmobiliaria {
     private Inmobiliaria() {
         inmuebles = new ArrayList<Inmueble>();
     }
+
+    /**
+     * Aplicamos Singleton
+     * @return
+     */
     public static Inmobiliaria getIsntancia() {
         if (isntancia == null) {
             isntancia = new Inmobiliaria();
