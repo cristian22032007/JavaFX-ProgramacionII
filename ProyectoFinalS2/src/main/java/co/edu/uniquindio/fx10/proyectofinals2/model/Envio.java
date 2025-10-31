@@ -1,6 +1,7 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Envio {
@@ -11,11 +12,11 @@ public class Envio {
     private EstadoEnvio estado;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaEstimadaEntrega;
+    private Pago pago;
     private List<ServicioAdicional> serviciosAdicionados;
 
     public Envio(String idEnvio, Direccion origen, Direccion destino, double costo, EstadoEnvio estado,
-                 LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, List<ServicioAdicional>
-                         serviciosAdicionados) {
+                 LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, Pago pago) {
         this.idEnvio = idEnvio;
         this.origen = origen;
         this.destino = destino;
@@ -23,6 +24,7 @@ public class Envio {
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-        this.serviciosAdicionados = serviciosAdicionados;
+        this.pago = pago;
+        this.serviciosAdicionados = new ArrayList<>();
     }
 }

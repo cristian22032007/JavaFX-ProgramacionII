@@ -9,8 +9,8 @@ public class Usuario extends Persona {
     private List<MetodoPago> metodosPago;
     private List<Envio> envios;
 
-    public Usuario(String id, String nombre, String telefono) {
-        super(id, nombre, telefono);
+    public Usuario(String id, String nombre, String telefono, String correo, String usuario, String contrasena) {
+        super(id, nombre, telefono, correo, usuario, contrasena);
         this.direcciones = new ArrayList<>();
         this.metodosPago = new ArrayList<>();
         this.envios = new ArrayList<>();
