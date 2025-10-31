@@ -1,21 +1,19 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
-import java.util.List;
-
 public class Direccion {
     private String idDireccion;
     private String alias;
     private String calle;
-    private String ciudad;
+    private ZonaCobertura municipio;
     private String codigoPostal;
-    private String coordenadaX;
-    private String coordenadaY;
+    private double coordenadaX;
+    private double coordenadaY;
 
-    public Direccion(String idDireccion, String alias, String calle, String ciudad, String codigoPostal, String coordenadaX, String coordenadaY) {
+    public Direccion(String idDireccion, String alias, String calle, ZonaCobertura municipio, String codigoPostal, double coordenadaX, double coordenadaY) {
         this.idDireccion = idDireccion;
         this.alias = alias;
         this.calle = calle;
-        this.ciudad = ciudad;
+        this.municipio = municipio;
         this.codigoPostal = codigoPostal;
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
@@ -33,19 +31,19 @@ public class Direccion {
         return calle;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public ZonaCobertura getMunicipio() {
+        return municipio;
     }
 
     public String getCodigoPostal() {
         return codigoPostal;
     }
 
-    public String getCoordenadaX() {
+    public double getCoordenadaX() {
         return coordenadaX;
     }
 
-    public String getCoordenadaY() {
+    public double getCoordenadaY() {
         return coordenadaY;
     }
 }

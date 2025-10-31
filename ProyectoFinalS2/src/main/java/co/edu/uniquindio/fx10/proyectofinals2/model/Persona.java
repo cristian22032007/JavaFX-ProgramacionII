@@ -1,6 +1,6 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
-public class Persona {
+public abstract class Persona {
     private String id;
     private String nombre;
     private String telefono;
