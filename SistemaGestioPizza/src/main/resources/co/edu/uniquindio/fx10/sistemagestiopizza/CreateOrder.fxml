@@ -27,9 +27,10 @@
                     </padding>
                 </Button>
 
-                <Label text="Crear Nueva Orden"
-                       textFill="white"
-                       style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Label  fx:id="label"
+                        text="Crear Nueva Orden"
+                        textFill="white"
+                        style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
             </HBox>
         </VBox>
     </top>
@@ -48,6 +49,7 @@
                     <ComboBox fx:id="cboTipoComida"
                               prefWidth="200"
                               style="-fx-font-size: 14px;"/>
+
                 </HBox>
             </VBox>
 

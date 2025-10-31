@@ -94,10 +94,10 @@ public class FormularioProductoController {
     /**
      * Maneja el evento de cancelar
      */
-    @FXML
-    private void onCancelar() {
-        volverAInicio();
-    }
+            @FXML
+            private void onCancelar() {
+                volverAInicio();
+            }
 
     /**
      * Vuelve a mostrar el inicio

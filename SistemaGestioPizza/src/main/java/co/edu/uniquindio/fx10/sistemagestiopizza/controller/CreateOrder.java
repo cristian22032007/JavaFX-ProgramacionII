@@ -4,10 +4,14 @@ package co.edu.uniquindio.fx10.sistemagestiopizza.controller;
 import co.edu.uniquindio.fx10.sistemagestiopizza.App;
 import co.edu.uniquindio.fx10.sistemagestiopizza.model.*;
 import co.edu.uniquindio.fx10.sistemagestiopizza.repository.OrderSistem;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 public class CreateOrder {
@@ -36,6 +40,9 @@ public class CreateOrder {
         @FXML
         private Button btnVolver;
 
+        @FXML
+        private Label label;
+
         // Singleton
         private OrderSistem ordenSistema;
 
@@ -59,6 +66,22 @@ public class CreateOrder {
 
             // Mostrar la orden inicial
             actualizarOrden();
+
+            TranslateTransition mover = new TranslateTransition(Duration.seconds(1), label);
+                mover.setFromX(-200);
+                mover.setToX(0);
+
+            // --- Animación de aparición (fade) ---
+                FadeTransition aparecer = new FadeTransition(Duration.seconds(1), label);
+                aparecer.setFromValue(0);
+                aparecer.setToValue(1);
+
+            // --- Ejecutar ambas animaciones al mismo tiempo ---
+                mover.play();
+                aparecer.play();
+
+
+
         }
 
         @FXML
@@ -110,18 +133,18 @@ public class CreateOrder {
             chkBebida.setSelected(false);
             actualizarOrden();
         }
-        public HomeSistem getHomeSistem() {
-            return homeSistem;
-        }
+
         public void setHomeSistem(HomeSistem homeSistem) {
             this.homeSistem = homeSistem;
         }
         @FXML
+
         private void volverAlInicio() throws IOException {
                     Parent inicio;
                     FXMLLoader loader = new FXMLLoader(App.class.getResource("/co/edu/uniquindio/fx10/sistemagestiopizza/Home.fxml"));
                     inicio = loader.load();
                     App.getPrimaryStage().getScene().setRoot(inicio);
-            }
+        }
+
 
 }
