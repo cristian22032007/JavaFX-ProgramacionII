@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Envio {
     private String idEnvio;
+    private Usuario usuario;
+    private Repartidor repartidor;
     private Direccion origen;
     private Direccion destino;
     private double costo;
@@ -15,9 +17,11 @@ public class Envio {
     private Pago pago;
     private List<ServicioAdicional> serviciosAdicionados;
 
-    public Envio(String idEnvio, Direccion origen, Direccion destino, double costo, EstadoEnvio estado,
+    public Envio(String idEnvio, Usuario usuario, Repartidor repartidor,Direccion origen, Direccion destino, double costo, EstadoEnvio estado,
                  LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, Pago pago) {
         this.idEnvio = idEnvio;
+        this.usuario = usuario;
+        this.repartidor = repartidor;
         this.origen = origen;
         this.destino = destino;
         this.costo = costo;
