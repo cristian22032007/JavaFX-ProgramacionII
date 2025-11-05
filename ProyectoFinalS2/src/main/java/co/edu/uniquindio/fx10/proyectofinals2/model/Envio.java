@@ -10,25 +10,29 @@ public class Envio {
     private Repartidor repartidor;
     private Direccion origen;
     private Direccion destino;
-    private double costo;
+    private Tarifa tarifa;
     private EstadoEnvio estado;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaEstimadaEntrega;
     private Pago pago;
+    private List<Paquete> paquetes;
     private List<ServicioAdicional> serviciosAdicionados;
+    private List<Incidencia> incidencias;
 
-    public Envio(String idEnvio, Usuario usuario, Repartidor repartidor,Direccion origen, Direccion destino, double costo, EstadoEnvio estado,
-                 LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, Pago pago) {
+    public Envio(String idEnvio, Usuario usuario, Repartidor repartidor, Direccion origen, Direccion destino, Tarifa tarifa,
+                 EstadoEnvio estado, LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, Pago pago) {
         this.idEnvio = idEnvio;
         this.usuario = usuario;
         this.repartidor = repartidor;
         this.origen = origen;
         this.destino = destino;
-        this.costo = costo;
+        this.tarifa = tarifa;
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
         this.pago = pago;
+        this.paquetes = new ArrayList<>();
         this.serviciosAdicionados = new ArrayList<>();
+        this.incidencias = new ArrayList<>();
     }
 }
