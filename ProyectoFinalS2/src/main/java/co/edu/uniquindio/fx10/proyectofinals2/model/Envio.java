@@ -35,4 +35,16 @@ public class Envio {
         this.serviciosAdicionados = new ArrayList<>();
         this.incidencias = new ArrayList<>();
     }
+
+    private double calcularPesoTotal() {
+        return paquetes.stream()
+                .mapToDouble(Paquete::getPesokg)
+                .sum();
+    }
+
+    private double calcularVolumenTotal() {
+        return paquetes.stream()
+                .mapToDouble(p -> p.getAncho() * p.getAlto() * p.getLargo())
+                .sum();
+    }
 }
