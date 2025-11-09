@@ -1,15 +1,15 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
-public class TarifaSeguro extends TarifaDecorator {
-    private static final double COSTO = 1500;
+public class TarifaFirmaRequerida  extends TarifaDecorator {
+    private static final double COSTO = 800;
 
-    public TarifaSeguro(ITarifa tarifa) {
+    public TarifaFirmaRequerida(ITarifa tarifa) {
         super(tarifa);
     }
 
     @Override
     public String getDescripcion() {
-        return tarifa.getDescripcion() + "+ Seguro";
+        return tarifa.getDescripcion() + "+ Firma Requerida";
     }
 
     @Override
@@ -17,4 +17,3 @@ public class TarifaSeguro extends TarifaDecorator {
         return tarifa.CalcularCosto(distanciaKm, pesoKg, volumenM3) + COSTO;
     }
 }
-

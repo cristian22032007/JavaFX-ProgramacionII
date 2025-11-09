@@ -1,6 +1,6 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
-public class Tarifa {
+public class Tarifa implements ITarifa {
         private String idTarifa;
         private final double tarifaBase = 30000;
         private double costoPorKm;
@@ -43,15 +43,22 @@ public class Tarifa {
         /**
          * Calcula el costo base sin servicios adicionales
          */
-        public double calcularCostoBase(double distanciaKm, double pesoKg, double volumenM3) {
+        @Override
+        public double CalcularCosto(double distanciaKm, double pesoKg, double volumenM3) {
             double costo = tarifaBase;
             costo += distanciaKm * costoPorKm;
             costo += pesoKg * costoPorKg;
             costo += volumenM3 * costoPorM3;
             return costo;
         }
+        public String getDescripcion() {
+            return "Tarifa Base";
+        }
 
-        // Getters
+
+
+
+    // Getters
         public String getIdTarifa() { return idTarifa; }
         public double getTarifaBase() { return tarifaBase; }
         public double getCostoPorKm() { return costoPorKm; }

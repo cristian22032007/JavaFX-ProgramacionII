@@ -1,15 +1,15 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
-public class TarifaSeguro extends TarifaDecorator {
-    private static final double COSTO = 1500;
+public class TarifaPrioridad  extends TarifaDecorator {
+    private static final double COSTO = 2000;
 
-    public TarifaSeguro(ITarifa tarifa) {
+    public TarifaPrioridad(ITarifa tarifa) {
         super(tarifa);
     }
 
     @Override
     public String getDescripcion() {
-        return tarifa.getDescripcion() + "+ Seguro";
+        return tarifa.getDescripcion() + "+ Prioridad";
     }
 
     @Override
