@@ -4,19 +4,14 @@ public class Direccion {
     private String idDireccion;
     private String alias;
     private String calle;
-    private ZonaCobertura municipio;
-    private String codigoPostal;
-    private double coordenadaX;
-    private double coordenadaY;
+    private ZonaDireccion municipio;
 
-    public Direccion(String idDireccion, String alias, String calle, ZonaCobertura municipio, String codigoPostal, double coordenadaX, double coordenadaY) {
+    public Direccion(String idDireccion, String alias, String calle, ZonaDireccion municipio) {
         this.idDireccion = idDireccion;
         this.alias = alias;
         this.calle = calle;
         this.municipio = municipio;
-        this.codigoPostal = codigoPostal;
-        this.coordenadaX = coordenadaX;
-        this.coordenadaY = coordenadaY;
+
     }
 
     public String getIdDireccion() {
@@ -31,19 +26,9 @@ public class Direccion {
         return calle;
     }
 
-    public ZonaCobertura getMunicipio() {
+    public ZonaDireccion getMunicipio() {
         return municipio;
     }
 
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
 
-    public double getCoordenadaX() {
-        return coordenadaX;
-    }
-
-    public double getCoordenadaY() {
-        return coordenadaY;
-    }
 }
