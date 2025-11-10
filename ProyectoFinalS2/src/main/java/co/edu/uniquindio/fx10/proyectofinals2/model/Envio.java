@@ -19,32 +19,173 @@ public class Envio {
     private List<ServicioAdicional> serviciosAdicionados;
     private List<Incidencia> incidencias;
 
-    public Envio(String idEnvio, Usuario usuario, Repartidor repartidor, Direccion origen, Direccion destino, Tarifa tarifa,
-                 EstadoEnvio estado, LocalDateTime fechaCreacion, LocalDateTime fechaEstimadaEntrega, Pago pago) {
-        this.idEnvio = idEnvio;
-        this.usuario = usuario;
-        this.repartidor = repartidor;
-        this.origen = origen;
-        this.destino = destino;
-        this.tarifa = tarifa;
-        this.estado = estado;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-        this.pago = pago;
+    public Envio(Builder builder) {
+        this.idEnvio = builder.idEnvio;
+        this.usuario = builder.usuario;
+        this.repartidor = builder.repartidor;
+        this.origen = builder.origen;
+        this.destino = builder.destino;
+        this.tarifa = builder.tarifa;
+        this.estado = builder.estado;
+        this.fechaCreacion = builder.fechaCreacion;
+        this.fechaEstimadaEntrega = builder.fechaEstimadaEntrega;
+        this.pago = builder.pago;
         this.paquetes = new ArrayList<>();
         this.serviciosAdicionados = new ArrayList<>();
         this.incidencias = new ArrayList<>();
     }
+    public static class Builder {
+        private String idEnvio;
+        private Usuario usuario;
+        private Repartidor repartidor;
+        private Direccion origen;
+        private Direccion destino;
+        private Tarifa tarifa;
+        private EstadoEnvio estado;
+        private LocalDateTime fechaCreacion;
+        private LocalDateTime fechaEstimadaEntrega;
+        private Pago pago;
 
-    private double calcularPesoTotal() {
-        return paquetes.stream()
-                .mapToDouble(Paquete::getPesokg)
-                .sum();
-    }
+        public Builder IdEnvio(String idEnvio) {
+            this.idEnvio = idEnvio;
+            return this;
+        }
+        public Builder Usuario(Usuario usuario) {
+            this.usuario = usuario;
+            return this;
+        }
+        public Builder Repartidor(Repartidor repartidor) {
+            this.repartidor = repartidor;
+            return this;
+        }
+        public Builder Origen(Direccion origen) {
+            this.origen = origen;
+            return this;
+        }
+        public Builder Destino(Direccion destino) {
+            this.destino = destino;
+            return this;
+        }
+        public Builder Tarifa(Tarifa tarifa) {
+            this.tarifa = tarifa;
+            return this;
+        }
+        public Builder EstadoEnvio(EstadoEnvio estado) {
+            this.estado = estado;
+            return this;
+        }
+        public Builder FechaCreacion(LocalDateTime fechaCreacion) {
+            this.fechaCreacion = fechaCreacion;
+            return this;
+        }
+        public Builder FechaEstimadaEntrega(LocalDateTime fechaEstimadaEntrega) {
+            this.fechaEstimadaEntrega = fechaEstimadaEntrega;
+            return this;
+        }
+        public Builder Pago(Pago pago) {
+            this.pago = pago;
+            return this;
+        }
+        public Envio build() {
+            return new Envio(this);
+        }
 
-    private double calcularVolumenTotal() {
-        return paquetes.stream()
-                .mapToDouble(p -> p.getAncho() * p.getAlto() * p.getLargo())
-                .sum();
+
+        }
+
+
+        // Getters
+        public String getIdEnvio() {
+            return idEnvio;
+        }
+
+        public Usuario getUsuario() {
+            return usuario;
+        }
+
+        public Repartidor getRepartidor() {
+            return repartidor;
+        }
+
+        public Direccion getOrigen() {
+            return origen;
+        }
+
+        public Direccion getDestino() {
+            return destino;
+        }
+
+        public Tarifa getTarifa() {
+            return tarifa;
+        }
+
+        public EstadoEnvio getEstado() {
+            return estado;
+        }
+
+        public LocalDateTime getFechaCreacion() {
+            return fechaCreacion;
+        }
+
+        public LocalDateTime getFechaEstimadaEntrega() {
+            return fechaEstimadaEntrega;
+        }
+
+        public Pago getPago() {
+            return pago;
+        }
+
+        public List<Paquete> getPaquetes() {
+            return paquetes;
+        }
+
+        public List<ServicioAdicional> getServiciosAdicionados() {
+            return serviciosAdicionados;
+        }
+
+        public List<Incidencia> getIncidencias() {
+            return incidencias;
+        }
+
+        // Setters importantes
+        public void setRepartidor(Repartidor repartidor) {
+            this.repartidor = repartidor;
+        }
+
+        public void setEstado(EstadoEnvio estado) {
+            this.estado = estado;
+        }
+
+        public void setPago(Pago pago) {
+            this.pago = pago;
+        }
+
+        public void setFechaEstimadaEntrega(LocalDateTime fecha) {
+            this.fechaEstimadaEntrega = fecha;
+        }
+
+        // Métodos de ayuda
+        private double calcularPesoTotal() {
+            return paquetes.stream()
+                    .mapToDouble(Paquete::getPesokg)
+                    .sum();
+        }
+
+        private double calcularVolumenTotal() {
+            return paquetes.stream()
+                    .mapToDouble(p -> p.getAncho() * p.getAlto() * p.getLargo() / 1000000.0)
+                    .sum();
+        }
+
+        public void agregarPaquete(Paquete paquete) {
+            this.paquetes.add(paquete);
+        }
+
+        public void agregarServicioAdicional(ServicioAdicional servicio) {
+            this.serviciosAdicionados.add(servicio);
+        }
+
+        public void agregarIncidencia(Incidencia incidencia) {
+            this.incidencias.add(incidencia);
+        }
     }
-}

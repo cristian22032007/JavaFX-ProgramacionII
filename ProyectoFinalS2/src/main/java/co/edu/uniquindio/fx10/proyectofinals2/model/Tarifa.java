@@ -19,6 +19,7 @@ public class Tarifa implements ITarifa {
             private double costoPorKm;
             private double costoPorKg;
             private double costoPorM3;
+
             public Builder idTarifa(String idTarifa) {
                 this.idTarifa = idTarifa;
                 return this;
