@@ -3,6 +3,7 @@ package co.edu.uniquindio.fx10.proyectofinals2.model.AdapterDTO;
 import co.edu.uniquindio.fx10.proyectofinals2.model.*;
 import co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class DTOAdapter {
                     usuario.getCorreo(),
                     usuario.getUsuario(),
                     usuario.getDirecciones().stream()
-                            .map(DTOMapper::toSimpleDTO)
+                            .map(DTOAdapter::toSimpleDTO)
                             .collect(Collectors.toList()),
                     usuario.getEnvios().size()
             );
@@ -90,14 +91,8 @@ public class DTOAdapter {
         }
 
         // ============ ADAPTAR: Paquete → DTO ============
-        public static PaqueteDTO toDTO(Paquete paquete) {
-            return new PaqueteDTO(
-                    paquete.getIdpaquete(),
-                    paquete.getAncho(),
-                    paquete.getAlto(),
-                    paquete.getLargo(),
-                    paquete.getPesokg()
-            );
+        public static PaqueteSimpleDTO toDTO(Paquete paquete) {
+            return new PaqueteSimpleDTO(paquete.getIdpaquete(), paquete.getAncho(), paquete.getAlto(), paquete.getLargo(), paquete.getPesokg());
         }
 
         // ============ ADAPTAR: Incidencia → DTO ============
@@ -113,7 +108,7 @@ public class DTOAdapter {
 
         // ============ ADAPTAR: MetodoPago → DTO ============
         public static MetodoPagoDTO toDTO(MetodoPago metodo) {
-            String numeroEnmascarado = enmascarar Numero(metodo.getNumeroSimulado());
+            String numeroEnmascarado = enmascararNumero(metodo.getNumeroSimulado());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             return new MetodoPagoDTO(
