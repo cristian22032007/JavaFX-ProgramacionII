@@ -5,7 +5,8 @@ public class Tarifa implements ITarifa {
         private final double tarifaBase = 30000;
         private double costoPorKm;
         private double costoPorKg;
-        private double costoPorM3; // volumen
+        private double costoPorM3;// volumen
+        private double costoTotal;
 
 
         protected Tarifa(Builder builder) {
@@ -13,6 +14,7 @@ public class Tarifa implements ITarifa {
             this.costoPorKm = builder.costoPorKm;
             this.costoPorKg = builder.costoPorKg;
             this.costoPorM3 = builder.costoPorM3;
+            this.costoTotal =
         }
         public static class Builder {
             private String idTarifa;

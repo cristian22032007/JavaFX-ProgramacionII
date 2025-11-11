@@ -64,8 +64,8 @@ public class DTOAdapter {
         }
 
         // ============ ADAPTAR: Envío → DTO ============
-        public static EnvioSimpleDTO toDTO(Envio envio) {
-            return new EnvioSimpleDTO(
+        public static EnvioDetalleDTO toDTO(Envio envio) {
+            return new EnvioDetalleDTO(
                     envio.getIdEnvio(),
                     envio.getUsuario().getNombre(),
                     envio.getRepartidor() != null ? envio.getRepartidor().getNombre() : "Sin asignar",
@@ -102,7 +102,8 @@ public class DTOAdapter {
                     incidencia.getDescripcion(),
                     incidencia.getFecha(),
                     incidencia.getEstado().name(),
-                    incidencia.getEnvio().getIdEnvio()
+                    incidencia.getEnvio().getIdEnvio(),
+                    incidencia.getFechaCierre()
             );
         }
 

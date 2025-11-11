@@ -176,6 +176,20 @@ public class Envio {
                     .mapToDouble(p -> p.getAncho() * p.getAlto() * p.getLargo() / 1000000.0)
                     .sum();
         }
+        public boolean tieneIncidencias() {
+             return !incidencias.isEmpty();
+        }
+
+        public boolean estaPagado() {
+            return pago != null && pago.getResultado().equals("APROBADO");
+        }
+
+
+        public int getCantidadPaquetes() {
+            return paquetes.size();
+        }
+
+
 
         public void agregarPaquete(Paquete paquete) {
             this.paquetes.add(paquete);
