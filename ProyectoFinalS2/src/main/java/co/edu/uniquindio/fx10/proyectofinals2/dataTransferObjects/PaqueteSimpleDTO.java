@@ -10,24 +10,16 @@ public class PaqueteSimpleDTO {
         private String dimensionesFormateadas;
 
         public PaqueteSimpleDTO(String idPaquete, double ancho, double alto,
-                          double largo, double pesoKg) {
+                          double largo, double pesoKg, double volumenM3, String dimensionesFormateadas) {
             this.idPaquete = idPaquete;
             this.ancho = ancho;
             this.alto = alto;
             this.largo = largo;
             this.pesoKg = pesoKg;
-            this.volumenM3 = calcularVolumen();
-            this.dimensionesFormateadas = formatearDimensiones();
+            this.volumenM3 = volumenM3;
+            this.dimensionesFormateadas = dimensionesFormateadas;
         }
 
-        private double calcularVolumen() {
-            // Convertir de cm³ a m³
-            return (ancho * alto * largo) / 1_000_000.0;
-        }
-
-        private String formatearDimensiones() {
-            return String.format("%.1f x %.1f x %.1f cm", ancho, alto, largo);
-        }
 
         // Getters
         public String getIdPaquete() { return idPaquete; }
@@ -37,10 +29,9 @@ public class PaqueteSimpleDTO {
         public double getPesoKg() { return pesoKg; }
         public double getVolumenM3() { return volumenM3; }
         public String getDimensionesFormateadas() { return dimensionesFormateadas; }
-
         public String getInfoCompleta() {
             return String.format("%s - %s - %.2f kg",
                     idPaquete, dimensionesFormateadas, pesoKg);
-        }
+    }
     }
 

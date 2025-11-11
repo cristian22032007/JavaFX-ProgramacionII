@@ -26,6 +26,7 @@ public class PagoSimpleDTO {
     public String getFecha() { return fecha; }
     public String getMetodoPago() { return metodoPago; }
     public String getResultado() { return resultado; }
+
 }
 
 

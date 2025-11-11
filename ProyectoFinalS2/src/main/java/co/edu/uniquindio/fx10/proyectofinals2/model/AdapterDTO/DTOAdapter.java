@@ -92,7 +92,7 @@ public class DTOAdapter {
 
         // ============ ADAPTAR: Paquete → DTO ============
         public static PaqueteSimpleDTO toDTO(Paquete paquete) {
-            return new PaqueteSimpleDTO(paquete.getIdpaquete(), paquete.getAncho(), paquete.getAlto(), paquete.getLargo(), paquete.getPesokg());
+            return new PaqueteSimpleDTO(paquete.getIdpaquete(), paquete.getAncho(), paquete.getAlto(), paquete.getLargo(), paquete.getPesokg(), paquete.getVolumenM3(), paquete.getDimensionesFormateadas());
         }
 
         // ============ ADAPTAR: Incidencia → DTO ============

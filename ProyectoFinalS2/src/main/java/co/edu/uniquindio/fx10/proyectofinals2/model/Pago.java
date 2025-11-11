@@ -36,4 +36,5 @@ public class Pago {
     public ResultadoPago getResultado() {
         return resultado;
     }
+
 }
