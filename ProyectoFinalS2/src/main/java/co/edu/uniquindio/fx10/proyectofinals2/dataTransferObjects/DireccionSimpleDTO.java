@@ -22,6 +22,9 @@ public class DireccionSimpleDTO {
     public String getCalle() { return calle; }
     public String getMunicipio() { return municipio; }
     public String getCodigoPostal() { return codigoPostal; }
+    public String getDireccionCompleta() {
+        return String.format("%s, %s - %s", calle, municipio, codigoPostal);
+    }
 }
 
 

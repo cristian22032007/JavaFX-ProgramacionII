@@ -17,8 +17,15 @@ public class Incidencia {
             this.envio = envio;
         }
 
-        public Envio getEnvio() {
-            return envio;
-        }
+    // Getters
+    public int getIdIncidencia() { return idIncidencia; }
+    public String getDescripcion() { return descripcion; }
+    public LocalDateTime getFecha() { return fecha; }
+    public EstadoIncidencia getEstado() { return estado; }
+    public Envio getEnvio() { return envio; }
+
+    // Setters
+    public void setEstado(EstadoIncidencia estado) { this.estado = estado; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     }
 
