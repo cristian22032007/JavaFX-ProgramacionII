@@ -1,8 +1,8 @@
 package co.edu.uniquindio.fx10.proyectofinals2.model;
 
 public class Tarifa implements ITarifa {
-        private String idTarifa;
-        private final double tarifaBase = 30000;
+        private final String idTarifa;
+        private static final double tarifaBase = 30000;
         private double costoPorKm;
         private double costoPorKg;
         private double costoPorM3;// volumen
@@ -14,7 +14,6 @@ public class Tarifa implements ITarifa {
             this.costoPorKm = builder.costoPorKm;
             this.costoPorKg = builder.costoPorKg;
             this.costoPorM3 = builder.costoPorM3;
-            this.costoTotal =
         }
         public static class Builder {
             private String idTarifa;
@@ -52,6 +51,7 @@ public class Tarifa implements ITarifa {
             costo += distanciaKm * costoPorKm;
             costo += pesoKg * costoPorKg;
             costo += volumenM3 * costoPorM3;
+            this.costoTotal = costo;
             return costo;
         }
         public String getDescripcion() {
