@@ -131,8 +131,7 @@ public class DTOAdapter {
                     tarifa.getCostoPorKg(),
                     tarifa.getCostoPorM3(),
                     costoBase,
-                    tarifa.getDescripcion(),
-                    new ArrayList<>(),
+                    tarifa.getDescripcion(), // ✅ Aquí llama al método
                     distancia,
                     peso,
                     volumen
