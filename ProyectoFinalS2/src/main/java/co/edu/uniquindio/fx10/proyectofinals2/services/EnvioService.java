@@ -30,12 +30,23 @@ import java.util.stream.Collectors;
          * @throws Exception
          */
         public Envio crearEnvio(String idUsuario, String idOrigen, String idDestino,
+                                List<Paquete> paquetes, // ← Recibe los paquetes
                                 List<ServicioAdicional> servicios) throws Exception {
-            // NO recibir ITarifa, recibir List<ServicioAdicional>
 
             Usuario usuario = repositorio.getUsuarios().get(idUsuario);
             Direccion origen = repositorio.getDirecciones().get(idOrigen);
             Direccion destino = repositorio.getDirecciones().get(idDestino);
+
+            if (usuario == null || origen == null || destino == null) {
+                throw new Exception("Usuario, origen o destino no encontrado");
+            }
+
+            // Validar que haya al menos un paquete
+            if (paquetes == null || paquetes.isEmpty()) {
+                throw new Exception("Debe haber al menos un paquete en el envío");
+            }
+
+            String idEnvio = GeneradorID.generarIDEnvio();
 
             // Crear tarifa base
             String idTarifa = GeneradorID.generarIDTarifa();
@@ -46,21 +57,31 @@ import java.util.stream.Collectors;
                     .costoPorM3(5000)
                     .build();
 
-            // Aplicar decoradores según servicios
+            // Aplicar servicios adicionales
             for (ServicioAdicional servicio : servicios) {
                 tarifa = aplicarServicio(tarifa, servicio);
             }
 
+            // Crear el envío
             Envio nuevoEnvio = new Envio.Builder()
                     .IdEnvio(idEnvio)
                     .Usuario(usuario)
                     .Origen(origen)
                     .Destino(destino)
-                    .Tarifa((Tarifa) tarifa)  // ← Ahora tiene sentido
+                    .Tarifa((Tarifa) tarifa)
                     .EstadoEnvio(EstadoEnvio.SOLICITADO)
                     .FechaCreacion(LocalDateTime.now())
                     .FechaEstimadaEntrega(LocalDateTime.now().plusHours(6))
                     .build();
+
+            // Agregar paquetes DESPUÉS de crear el envío
+            for (Paquete paquete : paquetes) {
+                nuevoEnvio.agregarPaquete(paquete);
+                repositorio.getPaquetes().put(paquete.getIdpaquete(), paquete);
+            }
+
+            usuario.getEnvios().add(nuevoEnvio);
+            repositorio.getEnvios().put(idEnvio, nuevoEnvio);
 
             return nuevoEnvio;
         }
@@ -73,6 +94,7 @@ import java.util.stream.Collectors;
                 case FIRMA_REQUERIDA -> new TarifaFirmaRequerida(tarifa);
             };
         }
+
         /**
          * Modificar Envio
          * @param idEnvio

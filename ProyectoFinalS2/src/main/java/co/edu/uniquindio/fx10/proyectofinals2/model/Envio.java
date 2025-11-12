@@ -224,6 +224,7 @@ public class Envio {
 
     public void agregarPaquete(Paquete paquete) {
         this.paquetes.add(paquete);
+        recalcularCosto(); // ← Recalcula automáticamente
     }
 
     public void agregarServicioAdicional(ServicioAdicional servicio) {
@@ -233,20 +234,25 @@ public class Envio {
     public void agregarIncidencia(Incidencia incidencia) {
         this.incidencias.add(incidencia);
     }
-        public double calcularDistancia() {
+    public double calcularDistancia() {
             double dx = destino.getMunicipio().getCoordenadaX() - origen.getMunicipio().getCoordenadaX();
             double dy = destino.getMunicipio().getCoordenadaY() - origen.getMunicipio().getCoordenadaY();
             return Math.sqrt(dx * dx + dy * dy);
     }
-        private double calcularPesoTotal() {
+    private double calcularPesoTotal() {
             return paquetes.stream()
                 .mapToDouble(Paquete::getPesokg)
                 .sum();
     }
-
-      private double calcularVolumenTotal() {
+    private double calcularVolumenTotal() {
             return paquetes.stream()
                 .mapToDouble(p -> p.getAncho() * p.getAlto() * p.getLargo() / 1000000.0)
                 .sum();
+    }
+    private void recalcularCosto() {
+        double distancia = calcularDistancia();
+        double peso = calcularPesoTotal();
+        double volumen = calcularVolumenTotal();
+        this.costoTotal = tarifa.CalcularCosto(distancia, peso, volumen);
     }
     }
