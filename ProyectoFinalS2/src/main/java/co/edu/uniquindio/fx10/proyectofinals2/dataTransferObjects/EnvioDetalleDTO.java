@@ -1,11 +1,12 @@
 package co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
 import java.util.List;
 
 /**
  * DTO completo para detalles de envío
- * Incluye toda la información necesaria para mostrar en vistas detalladas
+ * Usado tanto por Admin como por Usuario
+ * La interacción (clickeable o no) se maneja en la vista
  */
 public class EnvioDetalleDTO {
     private String idEnvio;
@@ -19,7 +20,6 @@ public class EnvioDetalleDTO {
     private String fechaEstimadaEntrega;
     private PagoSimpleDTO pago;
     private List<PaqueteSimpleDTO> paquetes;
-    private List<String> serviciosAdicionales;
     private List<IncidenciaDTO> incidencias;
 
     public EnvioDetalleDTO(String idEnvio, UsuarioSimpleDTO usuario,
@@ -27,7 +27,7 @@ public class EnvioDetalleDTO {
                            DireccionSimpleDTO destino, TarifaDTO tarifa, String estado,
                            String fechaCreacion, String fechaEstimadaEntrega,
                            PagoSimpleDTO pago, List<PaqueteSimpleDTO> paquetes,
-                           List<String> serviciosAdicionales, List<IncidenciaDTO> incidencias) {
+                           List<IncidenciaDTO> incidencias) {
         this.idEnvio = idEnvio;
         this.usuario = usuario;
         this.repartidor = repartidor;
@@ -39,7 +39,6 @@ public class EnvioDetalleDTO {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
         this.pago = pago;
         this.paquetes = paquetes != null ? paquetes : new ArrayList<>();
-        this.serviciosAdicionales = serviciosAdicionales != null ? serviciosAdicionales : new ArrayList<>();
         this.incidencias = incidencias != null ? incidencias : new ArrayList<>();
     }
 
@@ -55,14 +54,27 @@ public class EnvioDetalleDTO {
     public String getFechaEstimadaEntrega() { return fechaEstimadaEntrega; }
     public PagoSimpleDTO getPago() { return pago; }
     public List<PaqueteSimpleDTO> getPaquetes() { return paquetes; }
-    public List<String> getServiciosAdicionales() { return serviciosAdicionales; }
     public List<IncidenciaDTO> getIncidencias() { return incidencias; }
 
-    public String getServiciosResumen() {
-        return serviciosAdicionales.isEmpty() ?
-                "Sin servicios adicionales" :
-                String.join(", ", serviciosAdicionales);
+    // Métodos de utilidad
+    public String getServiciosAplicados() {
+        // Los servicios vienen en la descripción de la tarifa
+        return tarifa.getDescripcion();
     }
 
-}
+    public boolean tieneIncidencias() {
+        return !incidencias.isEmpty();
+    }
 
+    public int getCantidadPaquetes() {
+        return paquetes.size();
+    }
+
+    public String getEstadoPago() {
+        return pago != null ? pago.getResultado() : "PENDIENTE";
+    }
+
+    public String getRepartidorNombre() {
+        return repartidor != null ? repartidor.getNombre() : "Sin asignar";
+    }
+}
