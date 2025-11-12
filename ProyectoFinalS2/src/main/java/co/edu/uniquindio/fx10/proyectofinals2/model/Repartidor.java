@@ -33,4 +33,12 @@ public class Repartidor extends Persona {
     public List<Envio> getEnviosAsignados() {
         return enviosAsignados;
     }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public void setEstadoDisponibilidad(EstadoDisponibilidad estadoDisponibilidad) {
+        this.estadoDisponibilidad = estadoDisponibilidad;
+    }
 }

@@ -109,6 +109,29 @@ public class Envio {
 
     }
 
+    public void setIdEnvio(String idEnvio) {
+        this.idEnvio = idEnvio;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setOrigen(Direccion origen) {
+        this.origen = origen;
+    }
+
+    public void setDestino(Direccion destino) {
+        this.destino = destino;
+    }
+
+    public void setTarifa(Tarifa tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
 
     // Getters
     public String getIdEnvio() {
@@ -180,6 +203,9 @@ public class Envio {
         this.fechaEstimadaEntrega = fecha;
     }
 
+    public void setCostoTotal(double costoTotal) {
+        this.costoTotal = costoTotal;
+    }
     // Métodos de ayuda
 
     public boolean tieneIncidencias() {
