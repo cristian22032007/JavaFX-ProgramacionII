@@ -138,6 +138,12 @@ import java.util.stream.Collectors;
             if (usuario == null) {
                 throw new Exception("Usuario no encontrado");
             }
+            boolean aliasExiste = usuario.getDirecciones().stream()
+                    .anyMatch(d -> d.getAlias().equalsIgnoreCase(alias));
+
+            if (aliasExiste) {
+                throw new Exception("Ya existe una dirección con ese alias");
+            }
 
             if (!Validador.validarTextoNoVacio(alias) || !Validador.validarTextoNoVacio(calle)) {
                 throw new Exception("El alias y la calle no pueden estar vacíos");

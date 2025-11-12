@@ -35,6 +35,19 @@ public class Repositorio {
         }
         return instancia;
     }
+    public void inicializarSistemaPorDefecto() {
+        if (administradores.isEmpty()) {
+            Administrador adminDefault = new Administrador(
+                    "ADM001",
+                    "Administrador",
+                    "3001234567",
+                    "admin@rapponcho.com",
+                    "admin",
+                    "admin123"
+            );
+            administradores.put(adminDefault.getId(), adminDefault);
+        }
+    }
 
     // Getters de los mapas
     public Map<String, Usuario> getUsuarios() { return usuarios; }

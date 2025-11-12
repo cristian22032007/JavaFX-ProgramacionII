@@ -11,6 +11,11 @@ import java.util.concurrent.atomic.AtomicInteger;
         private static final AtomicInteger contadorDireccion = new AtomicInteger(1);
         private static final AtomicInteger contadorRepartidor = new AtomicInteger(100);
         private static final AtomicInteger contadorPaquete = new AtomicInteger(1);
+        private static final AtomicInteger contadorIncidencia = new AtomicInteger(1);
+
+        public static String generarIDIncidencia() {
+            return "INC" + String.format("%06d", contadorIncidencia.incrementAndGet());
+        }
 
         public static String generarIDUsuario() {
             return "USR" + contadorUsuario.incrementAndGet();
