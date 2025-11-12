@@ -25,43 +25,54 @@ import java.util.stream.Collectors;
          * @param idUsuario
          * @param idOrigen
          * @param idDestino
-         * @param tarifa
+         * @param servicios
          * @return
          * @throws Exception
          */
         public Envio crearEnvio(String idUsuario, String idOrigen, String idDestino,
-                                ITarifa tarifa) throws Exception {
-            Usuario usuario = repositorio.getUsuarios().get(idUsuario);
-            if (usuario == null) {
-                throw new Exception("Usuario no encontrado");
-            }
+                                List<ServicioAdicional> servicios) throws Exception {
+            // NO recibir ITarifa, recibir List<ServicioAdicional>
 
+            Usuario usuario = repositorio.getUsuarios().get(idUsuario);
             Direccion origen = repositorio.getDirecciones().get(idOrigen);
             Direccion destino = repositorio.getDirecciones().get(idDestino);
 
-            if (origen == null || destino == null) {
-                throw new Exception("Dirección de origen o destino no encontrada");
-            }
+            // Crear tarifa base
+            String idTarifa = GeneradorID.generarIDTarifa();
+            ITarifa tarifa = new Tarifa.Builder()
+                    .idTarifa(idTarifa)
+                    .costoPorKm(2000)
+                    .costoPorKg(1500)
+                    .costoPorM3(5000)
+                    .build();
 
-            String idEnvio = GeneradorID.generarIDEnvio();
+            // Aplicar decoradores según servicios
+            for (ServicioAdicional servicio : servicios) {
+                tarifa = aplicarServicio(tarifa, servicio);
+            }
 
             Envio nuevoEnvio = new Envio.Builder()
                     .IdEnvio(idEnvio)
                     .Usuario(usuario)
                     .Origen(origen)
                     .Destino(destino)
-                    .Tarifa((Tarifa) tarifa)
+                    .Tarifa((Tarifa) tarifa)  // ← Ahora tiene sentido
                     .EstadoEnvio(EstadoEnvio.SOLICITADO)
                     .FechaCreacion(LocalDateTime.now())
                     .FechaEstimadaEntrega(LocalDateTime.now().plusHours(6))
                     .build();
 
-            usuario.getEnvios().add(nuevoEnvio);
-            repositorio.getEnvios().put(idEnvio, nuevoEnvio);
-
             return nuevoEnvio;
         }
 
+        private ITarifa aplicarServicio(ITarifa tarifa, ServicioAdicional servicio) {
+            return switch (servicio) {
+                case SEGURO -> new TarifaSeguro(tarifa);
+                case PRIORIDAD -> new TarifaPrioridad(tarifa);
+                case FRAGIL -> new TarifaFragil(tarifa);
+                case FIRMA_REQUERIDA -> new TarifaFirmaRequerida(tarifa);
+            };
+        }
         /**
          * Modificar Envio
          * @param idEnvio
