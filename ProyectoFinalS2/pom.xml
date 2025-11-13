@@ -60,8 +60,9 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
+                            <!-- CAMBIO IMPORTANTE: Apuntar a MainApp en lugar de HelloApplication -->
                             <mainClass>
-                                co.edu.uniquindio.fx10.proyectofinals2/co.edu.uniquindio.fx10.proyectofinals2.HelloApplication
+                                co.edu.uniquindio.fx10.proyectofinals2/co.edu.uniquindio.fx10.proyectofinals2.MainApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
