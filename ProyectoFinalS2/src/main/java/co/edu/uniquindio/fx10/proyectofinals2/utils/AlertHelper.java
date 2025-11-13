@@ -102,7 +102,7 @@ public class AlertHelper {
     /**
      * Método base para crear alertas consistentes
      */
-    private static void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje, String header) {
+    public static void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje, String header) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
         alert.setHeaderText(header);

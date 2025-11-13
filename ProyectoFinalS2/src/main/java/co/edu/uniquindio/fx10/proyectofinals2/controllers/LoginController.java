@@ -12,11 +12,14 @@ import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class LoginController {
 
@@ -243,6 +246,32 @@ public class LoginController {
         lblError.setVisible(false);
     }
 
+    @FXML
+    private void handleRecuperarContrasena(ActionEvent event) {
+        try {
+            // Cargar el FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/RecuperarContrasena.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el stage actual
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Crear nueva escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Recuperar Contraseña");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Mostrar alerta de error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se pudo cargar la ventana");
+            alert.setContentText("Error: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
     /**
      * Configura animaciones de hover para botones
      */
