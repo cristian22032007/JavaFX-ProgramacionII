@@ -4,8 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -119,7 +117,9 @@
                             <font><Font size="14"/></font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Hyperlink text="¿Olvidaste tu contraseña?" style="-fx-text-fill: #667eea; -fx-font-size: 12px;"/>
+                        <Hyperlink text="¿Olvidaste tu contraseña?"
+                                   onAction="#handleRecuperarContrasena"
+                                   style="-fx-text-fill: #667eea; -fx-font-size: 12px;"/>
                     </HBox>
                     <PasswordField fx:id="txtContrasena" promptText="Ingresa tu contraseña"
                                    style="-fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 12 16; -fx-font-size: 14px;">
