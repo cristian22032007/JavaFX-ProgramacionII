@@ -2,9 +2,11 @@ package co.edu.uniquindio.fx10.proyectofinals2.controllers;
 
 
 import co.edu.uniquindio.fx10.proyectofinals2.model.Administrador;
+import co.edu.uniquindio.fx10.proyectofinals2.model.Repartidor;
 import co.edu.uniquindio.fx10.proyectofinals2.model.Usuario;
 import co.edu.uniquindio.fx10.proyectofinals2.reposytorie.Repositorio;
 import co.edu.uniquindio.fx10.proyectofinals2.services.AdministradorService;
+import co.edu.uniquindio.fx10.proyectofinals2.services.RepartidorService;
 import co.edu.uniquindio.fx10.proyectofinals2.services.UsuarioService;
 import co.edu.uniquindio.fx10.proyectofinals2.utils.AlertHelper;
 import javafx.event.ActionEvent;
@@ -24,16 +26,19 @@ public class LoginController {
     @FXML private PasswordField txtContrasena;
     @FXML private RadioButton rbUsuario;
     @FXML private RadioButton rbAdministrador;
+    @FXML private RadioButton rbRepartidor;
     @FXML private CheckBox chkRecordarme;
     @FXML private Button btnIniciarSesion;
     @FXML private Hyperlink linkRegistro;
 
     private final UsuarioService usuarioService;
     private final AdministradorService administradorService;
+    private final RepartidorService repartidorService;
 
     public LoginController() {
         this.usuarioService = new UsuarioService();
         this.administradorService = new AdministradorService();
+        this.repartidorService = new RepartidorService();
         Repositorio.getInstancia().inicializarSistemaPorDefecto();
     }
 
@@ -60,7 +65,9 @@ public class LoginController {
 
         String usuario = txtUsuario.getText().trim();
         String contrasena = txtContrasena.getText();
+
         boolean esUsuario = rbUsuario.isSelected();
+        boolean esRepartidor = rbRepartidor != null && rbRepartidor.isSelected();
 
         btnIniciarSesion.setDisable(true);
 
@@ -69,6 +76,10 @@ public class LoginController {
                 Usuario usuarioAutenticado = usuarioService.iniciarSesion(usuario, contrasena);
                 AlertHelper.mostrarExito("Éxito", "¡Bienvenido, " + usuarioAutenticado.getNombre() + "!");
                 navegarAPantallaUsuario(usuarioAutenticado);
+            } else if (esRepartidor) {
+                Repartidor repartidorAutenticado = iniciarSesionRepartidor(usuario, contrasena);
+                AlertHelper.mostrarExito("Éxito", "¡Bienvenido, " + repartidorAutenticado.getNombre() + "!");
+                navegarAPantallaRepartidor(repartidorAutenticado);
             } else {
                 Administrador adminAutenticado = administradorService.iniciarSesion(usuario, contrasena);
                 AlertHelper.mostrarExito("Éxito", "¡Bienvenido, Administrador!");
@@ -80,6 +91,26 @@ public class LoginController {
         }
     }
 
+    /**
+     * Inicia sesión para repartidores
+     */
+    private Repartidor iniciarSesionRepartidor(String usuario, String contrasena) throws Exception {
+        Repartidor repartidor = Repositorio.getInstancia().getRepartidores().values().stream()
+                .filter(r -> r.getUsuario().equals(usuario))
+                .findFirst()
+                .orElse(null);
+
+        if (repartidor == null) {
+            throw new Exception("Repartidor no encontrado");
+        }
+
+        if (!repartidor.getContrasena().equals(contrasena)) {
+            throw new Exception("Contraseña incorrecta");
+        }
+
+        return repartidor;
+    }
+
     private void navegarAPantallaUsuario(Usuario usuario) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -87,16 +118,39 @@ public class LoginController {
             );
             Parent root = loader.load();
 
-            // Pasar el usuario al controlador si existe
-            // UsuarioMainController controller = loader.getController();
-            // controller.setUsuario(usuario);
+            // Pasar el usuario al controlador
+            UsuarioMainController controller = loader.getController();
+            controller.setUsuario(usuario);
 
             Stage stage = (Stage) btnIniciarSesion.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("RapponCho - Panel de Usuario");
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             AlertHelper.mostrarError("Error", "No se pudo cargar la pantalla principal: " + e.getMessage());
+            btnIniciarSesion.setDisable(false);
+        }
+    }
+
+    private void navegarAPantallaRepartidor(Repartidor repartidor) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/RepartidorMain.fxml")
+            );
+            Parent root = loader.load();
+
+            // Pasar el repartidor al controlador
+            RepartidorMainController controller = loader.getController();
+            controller.setRepartidor(repartidor);
+
+            Stage stage = (Stage) btnIniciarSesion.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("RapponCho - Panel de Repartidor");
+            stage.centerOnScreen();
+
+        } catch (Exception e) {
+            AlertHelper.mostrarError("Error", "No se pudo cargar la pantalla de repartidor: " + e.getMessage());
             btnIniciarSesion.setDisable(false);
         }
     }
@@ -108,13 +162,14 @@ public class LoginController {
             );
             Parent root = loader.load();
 
-            // Pasar el admin al controlador si existe
-            // AdminMainController controller = loader.getController();
-            // controller.setAdministrador(admin);
+            // Pasar el admin al controlador
+            AdminMainController controller = loader.getController();
+            controller.setAdministrador(admin);
 
             Stage stage = (Stage) btnIniciarSesion.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("RapponCho - Panel de Administración");
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             AlertHelper.mostrarError("Error", "No se pudo cargar la pantalla de administración: " + e.getMessage());
@@ -133,6 +188,7 @@ public class LoginController {
             Stage stage = (Stage) linkRegistro.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("RapponCho - Registro");
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             AlertHelper.mostrarError("Error", "No se pudo cargar la pantalla de registro: " + e.getMessage());
@@ -150,6 +206,7 @@ public class LoginController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("RapponCho - Recuperar Contraseña");
+            stage.centerOnScreen();
 
         } catch (IOException e) {
             AlertHelper.mostrarError("Error", "No se pudo cargar la ventana de recuperación: " + e.getMessage());

@@ -138,6 +138,8 @@
                                 <ToggleGroup fx:id="tipoUsuario"/>
                             </toggleGroup>
                         </RadioButton>
+                        <RadioButton fx:id="rbRepartidor" text="Repartidor" toggleGroup="$tipoUsuario"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
                         <RadioButton fx:id="rbAdministrador" text="Administrador" toggleGroup="$tipoUsuario"
                                      style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
                     </HBox>
