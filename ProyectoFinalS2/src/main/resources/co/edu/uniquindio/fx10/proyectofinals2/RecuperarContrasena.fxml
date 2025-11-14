@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+        <?import javafx.geometry.Insets?>
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tu.paquete.controlador.RecuperarContrasenaController"
+            fx:controller="co.edu.uniquindio.fx10.proyectofinals2.controllers.RecuperarContrasenaController"
             prefHeight="450.0" prefWidth="500.0"
             style="-fx-background-color: #f5f5f5;">
 
@@ -34,7 +34,7 @@
                        prefWidth="300.0"/>
         </VBox>
 
-        <!-- Área de resultado (muestra la contraseña temporal) -->
+        <!-- Área de resultado -->
         <VBox fx:id="vboxResultado" spacing="10.0" alignment="CENTER"
               visible="false" managed="false"
               style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-background-radius: 5;">
@@ -47,18 +47,17 @@
                 <Label fx:id="lblContrasenaTemp"
                        style="-fx-font-size: 16px; -fx-text-fill: #1976d2; -fx-font-weight: bold;"/>
                 <Button text="📋" onAction="#copiarContrasena"
-                        style="-fx-background-color: transparent; -fx-cursor: hand;"
-                        tooltip="Copiar contraseña"/>
+                        style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Copiar contraseña"/>
+                    </tooltip>
+                </Button>
             </HBox>
 
             <Label text="(Guarda esta contraseña. Podrás cambiarla después de iniciar sesión)"
                    wrapText="true" textAlignment="CENTER"
                    style="-fx-text-fill: #666666; -fx-font-size: 11px;"/>
         </VBox>
-
-        <!-- Mensaje de error -->
-        <Label fx:id="lblError" textFill="RED" wrapText="true"
-               visible="false" managed="false"/>
 
         <!-- Botones -->
         <HBox spacing="15.0" alignment="CENTER">
