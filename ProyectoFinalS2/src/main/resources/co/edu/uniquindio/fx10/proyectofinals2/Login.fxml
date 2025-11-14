@@ -145,9 +145,7 @@
                     </HBox>
                 </VBox>
 
-                <!-- Recordarme -->
-                <CheckBox fx:id="chkRecordarme" text="Recordar mis credenciales"
-                          style="-fx-text-fill: #64748b; -fx-font-size: 13px;"/>
+
 
                 <!-- Mensaje de Error -->
                 <Label fx:id="lblError" textFill="#dc2626" wrapText="true" visible="false"

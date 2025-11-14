@@ -135,15 +135,33 @@ public class DTOAdapter {
     }
 
     // ============ ADAPTAR: Tarifa → DTO ============
-    public static TarifaDTO toDTO(Tarifa tarifa, double distancia, double peso, double volumen) {
+    // ========== ARCHIVO: DTOAdapter.java (método toDTO para Tarifa) ==========
+    public static TarifaDTO toDTO(ITarifa tarifa, double distancia, double peso, double volumen) {
         double costoTotal = tarifa.CalcularCosto(distancia, peso, volumen);
 
+        // Valores por defecto si no es una Tarifa base
+        double tarifaBase = 30000;
+        double costoPorKm = 2000;
+        double costoPorKg = 1500;
+        double costoPorM3 = 5000;
+        String idTarifa = "TAR" + System.currentTimeMillis();
+
+        // Si es una Tarifa base, obtener valores reales
+        if (tarifa instanceof Tarifa) {
+            Tarifa tarifaReal = (Tarifa) tarifa;
+            idTarifa = tarifaReal.getIdTarifa();
+            tarifaBase = tarifaReal.getTarifaBase();
+            costoPorKm = tarifaReal.getCostoPorKm();
+            costoPorKg = tarifaReal.getCostoPorKg();
+            costoPorM3 = tarifaReal.getCostoPorM3();
+        }
+
         return new TarifaDTO(
-                tarifa.getIdTarifa(),
-                tarifa.getTarifaBase(),
-                tarifa.getCostoPorKm(),
-                tarifa.getCostoPorKg(),
-                tarifa.getCostoPorM3(),
+                idTarifa,
+                tarifaBase,
+                costoPorKm,
+                costoPorKg,
+                costoPorM3,
                 costoTotal,
                 tarifa.getDescripcion(),
                 distancia,
@@ -151,7 +169,6 @@ public class DTOAdapter {
                 volumen
         );
     }
-
     // ============ MÉTODOS AUXILIARES ============
     private static String enmascararNumero(String numero) {
         if (numero == null || numero.length() < 4) {

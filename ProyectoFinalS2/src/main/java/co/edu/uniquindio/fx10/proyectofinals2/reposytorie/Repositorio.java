@@ -153,9 +153,10 @@ public class Repositorio {
                     .costoPorKg(1500)
                     .costoPorM3(5000)
                     .build();
-
             // Crear envío de ejemplo
             Envio envioEjemplo = new Envio.Builder()
+
+                    .IdEnvio(GeneradorID.generarIDEnvio())
                     .Usuario(usuarioDefault)
                     .Repartidor(repartidorDefault)
                     .Origen(dir1)
@@ -165,7 +166,7 @@ public class Repositorio {
                     .FechaCreacion(java.time.LocalDateTime.now().minusHours(2))
                     .FechaEstimadaEntrega(java.time.LocalDateTime.now().plusHours(4))
                     .build();
-                    GeneradorID.generarIDEnvio();
+
 
 
             // Crear paquete

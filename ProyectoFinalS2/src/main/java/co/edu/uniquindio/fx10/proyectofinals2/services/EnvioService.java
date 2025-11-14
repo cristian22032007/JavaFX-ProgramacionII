@@ -29,8 +29,9 @@ import java.util.stream.Collectors;
          * @return
          * @throws Exception
          */
+        // ========== ARCHIVO: EnvioService.java (método crearEnvio) ==========
         public Envio crearEnvio(String idUsuario, String idOrigen, String idDestino,
-                                List<Paquete> paquetes, // ← Recibe los paquetes
+                                List<Paquete> paquetes,
                                 List<ServicioAdicional> servicios) throws Exception {
 
             Usuario usuario = repositorio.getUsuarios().get(idUsuario);
@@ -41,7 +42,6 @@ import java.util.stream.Collectors;
                 throw new Exception("Usuario, origen o destino no encontrado");
             }
 
-            // Validar que haya al menos un paquete
             if (paquetes == null || paquetes.isEmpty()) {
                 throw new Exception("Debe haber al menos un paquete en el envío");
             }
@@ -57,27 +57,32 @@ import java.util.stream.Collectors;
                     .costoPorM3(5000)
                     .build();
 
-            // Aplicar servicios adicionales
+            // Aplicar servicios adicionales (decoradores)
             for (ServicioAdicional servicio : servicios) {
                 tarifa = aplicarServicio(tarifa, servicio);
             }
 
-            // Crear el envío
+            // Crear el envío con la tarifa decorada
             Envio nuevoEnvio = new Envio.Builder()
                     .IdEnvio(idEnvio)
                     .Usuario(usuario)
                     .Origen(origen)
                     .Destino(destino)
-                    .Tarifa((Tarifa) tarifa)
+                    .Tarifa(tarifa)  // ← Ahora acepta ITarifa
                     .EstadoEnvio(EstadoEnvio.SOLICITADO)
                     .FechaCreacion(LocalDateTime.now())
                     .FechaEstimadaEntrega(LocalDateTime.now().plusHours(6))
                     .build();
 
-            // Agregar paquetes DESPUÉS de crear el envío
+            // Agregar paquetes
             for (Paquete paquete : paquetes) {
                 nuevoEnvio.agregarPaquete(paquete);
                 repositorio.getPaquetes().put(paquete.getIdpaquete(), paquete);
+            }
+
+            // Registrar servicios
+            for (ServicioAdicional servicio : servicios) {
+                nuevoEnvio.agregarServicioAdicional(servicio);
             }
 
             usuario.getEnvios().add(nuevoEnvio);

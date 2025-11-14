@@ -10,7 +10,7 @@ public class Envio {
     private Repartidor repartidor;
     private Direccion origen;
     private Direccion destino;
-    private Tarifa tarifa;
+    private ITarifa tarifa;
     private EstadoEnvio estado;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaEstimadaEntrega;
@@ -46,7 +46,7 @@ public class Envio {
         private Repartidor repartidor;
         private Direccion origen;
         private Direccion destino;
-        private Tarifa tarifa;
+        private ITarifa tarifa;
         private EstadoEnvio estado;
         private LocalDateTime fechaCreacion;
         private LocalDateTime fechaEstimadaEntrega;
@@ -77,7 +77,7 @@ public class Envio {
             return this;
         }
 
-        public Builder Tarifa(Tarifa tarifa) {
+        public Builder Tarifa(ITarifa tarifa) {
             this.tarifa = tarifa;
             return this;
         }
@@ -154,7 +154,7 @@ public class Envio {
         return destino;
     }
 
-    public Tarifa getTarifa() {
+    public ITarifa getTarifa() {
         return tarifa;
     }
 
