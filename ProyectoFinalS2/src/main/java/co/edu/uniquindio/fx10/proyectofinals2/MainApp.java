@@ -33,8 +33,8 @@ public class MainApp extends Application {
             primaryStage.setTitle("RapponCho - Envíos Urbanos Same-Day");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
-            primaryStage.setMinWidth(900);
-            primaryStage.setMinHeight(650);
+            primaryStage.setMinWidth(800);
+            primaryStage.setMinHeight(700);
 
             // Opcional: Agregar ícono a la aplicación
             try {
@@ -51,11 +51,11 @@ public class MainApp extends Application {
             // Mostrar la ventana
             primaryStage.show();
 
-            System.out.println("✅ Aplicación RapponCho iniciada correctamente");
-            System.out.println("📦 Pantalla de Login cargada");
+            System.out.println("Aplicación RapponCho iniciada correctamente");
+            System.out.println("Pantalla de Login cargada");
 
         } catch (Exception e) {
-            System.err.println("❌ Error al iniciar la aplicación:");
+            System.err.println("Error al iniciar la aplicación:");
             e.printStackTrace();
 
             // Mostrar alerta de error
@@ -73,7 +73,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        System.out.println("🛑 Aplicación RapponCho cerrada");
+        System.out.println("Aplicación RapponCho cerrada");
     }
 
     public static void main(String[] args) {
