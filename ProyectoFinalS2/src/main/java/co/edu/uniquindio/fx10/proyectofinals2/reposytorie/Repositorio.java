@@ -1,6 +1,7 @@
 package co.edu.uniquindio.fx10.proyectofinals2.reposytorie;
 
 import co.edu.uniquindio.fx10.proyectofinals2.model.*;
+import co.edu.uniquindio.fx10.proyectofinals2.utils.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -155,7 +156,6 @@ public class Repositorio {
 
             // Crear envío de ejemplo
             Envio envioEjemplo = new Envio.Builder()
-                    .IdEnvio("ENV2025010100001")
                     .Usuario(usuarioDefault)
                     .Repartidor(repartidorDefault)
                     .Origen(dir1)
@@ -165,6 +165,8 @@ public class Repositorio {
                     .FechaCreacion(java.time.LocalDateTime.now().minusHours(2))
                     .FechaEstimadaEntrega(java.time.LocalDateTime.now().plusHours(4))
                     .build();
+                    GeneradorID.generarIDEnvio();
+
 
             // Crear paquete
             Paquete paquete = new Paquete(

@@ -144,8 +144,10 @@
                             <VBox spacing="10" alignment="CENTER"
                                   style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 12; -fx-min-width: 200;">
                                 <Label text="Ingresos Totales" style="-fx-text-fill: #64748b;"/>
-                                <Label fx:id="lblIngresosTotales" text="$0.00"
-                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #8b5cf6;"/>
+                                <Label fx:id="lblIngresosTotales"
+                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #8b5cf6;">
+                                    <text>$0.00</text>
+                                </Label>
                             </VBox>
                         </HBox>
 
