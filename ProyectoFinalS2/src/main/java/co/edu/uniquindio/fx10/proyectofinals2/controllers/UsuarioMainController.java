@@ -1,6 +1,8 @@
 package co.edu.uniquindio.fx10.proyectofinals2.controllers;
 
-
+import javafx.stage.FileChooser;
+import co.edu.uniquindio.fx10.proyectofinals2.services.ReporteService;
+import java.io.File;
 import co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects.*;
 import co.edu.uniquindio.fx10.proyectofinals2.model.*;
 import co.edu.uniquindio.fx10.proyectofinals2.model.AdapterDTO.DTOAdapter;
@@ -560,6 +562,102 @@ public class UsuarioMainController {
 
         } catch (Exception e) {
             AlertHelper.mostrarError("Error", "No se pudo cerrar sesión: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void handleDescargarMisEnviosPDF(ActionEvent event) {
+        try {
+            ReporteService reporteService = new ReporteService();
+
+            // Generar con filtros de fecha (opcional)
+            File archivoPDF = reporteService.generarReporteUsuarioPDF(
+                    usuarioActual.getId(),
+                    null, // fecha inicio (null = todos)
+                    null  // fecha fin (null = todos)
+            );
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Reporte de Mis Envíos");
+            fileChooser.setInitialFileName("mis_envios_" +
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
+                    ) + ".pdf");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf")
+            );
+
+            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
+            File archivoDestino = fileChooser.showSaveDialog(stage);
+
+            if (archivoDestino != null) {
+                java.nio.file.Files.copy(
+                        archivoPDF.toPath(),
+                        archivoDestino.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+
+                AlertHelper.mostrarExito("Reporte Generado",
+                        "Tu reporte se guardó en:\n" + archivoDestino.getAbsolutePath());
+
+                boolean abrir = AlertHelper.mostrarConfirmacion(
+                        "Abrir Reporte",
+                        "¿Deseas abrirlo ahora?"
+                );
+
+                if (abrir) {
+                    java.awt.Desktop.getDesktop().open(archivoDestino);
+                }
+            }
+
+            archivoPDF.delete();
+
+        } catch (Exception e) {
+            AlertHelper.mostrarError("Error",
+                    "No se pudo generar el reporte:\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleDescargarMisEnviosExcel(ActionEvent event) {
+        try {
+            ReporteService reporteService = new ReporteService();
+            File archivoExcel = reporteService.generarReporteUsuarioExcel(
+                    usuarioActual.getId(), null, null
+            );
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Reporte Excel");
+            fileChooser.setInitialFileName("mis_envios_" +
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
+                    ) + ".xlsx");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Archivos Excel", "*.xlsx")
+            );
+
+            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
+            File archivoDestino = fileChooser.showSaveDialog(stage);
+
+            if (archivoDestino != null) {
+                java.nio.file.Files.copy(
+                        archivoExcel.toPath(),
+                        archivoDestino.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+
+                AlertHelper.mostrarExito("Reporte Generado",
+                        "Tu reporte se guardó exitosamente");
+
+                if (AlertHelper.mostrarConfirmacion("Abrir", "¿Abrir ahora?")) {
+                    java.awt.Desktop.getDesktop().open(archivoDestino);
+                }
+            }
+
+            archivoExcel.delete();
+
+        } catch (Exception e) {
+            AlertHelper.mostrarError("Error", e.getMessage());
         }
     }
 }

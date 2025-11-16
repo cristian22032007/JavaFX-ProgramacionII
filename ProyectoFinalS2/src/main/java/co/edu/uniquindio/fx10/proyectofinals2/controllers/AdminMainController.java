@@ -1,5 +1,9 @@
 package co.edu.uniquindio.fx10.proyectofinals2.controllers;
 
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects.*;
 import co.edu.uniquindio.fx10.proyectofinals2.model.*;
 import co.edu.uniquindio.fx10.proyectofinals2.model.AdapterDTO.DTOAdapter;
@@ -976,5 +980,116 @@ public class AdminMainController {
         }
 
         System.out.println("\n" + "=".repeat(60) + "\n");
+    }
+    // ========== DESCARGA DE REPORTES ==========
+
+    /**
+     * Descarga reporte administrativo en PDF
+     */
+    @FXML
+    private void handleDescargarReportePDF(ActionEvent event) {
+        try {
+            // Crear servicio de reportes
+            ReporteService reporteService = new ReporteService();
+
+            // Generar archivo PDF
+            File archivoPDF = reporteService.generarReporteAdminPDF();
+
+            // Abrir diálogo para guardar archivo
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Reporte PDF");
+            fileChooser.setInitialFileName("reporte_admin_" +
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+                    ) + ".pdf");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf")
+            );
+
+            // Obtener ventana actual
+            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
+            File archivoDestino = fileChooser.showSaveDialog(stage);
+
+            if (archivoDestino != null) {
+                // Copiar archivo temporal al destino seleccionado
+                java.nio.file.Files.copy(
+                        archivoPDF.toPath(),
+                        archivoDestino.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+
+                AlertHelper.mostrarExito("Reporte Generado",
+                        "El reporte PDF se guardó exitosamente en:\n" + archivoDestino.getAbsolutePath());
+
+                // Preguntar si desea abrir el archivo
+                boolean abrir = AlertHelper.mostrarConfirmacion(
+                        "Abrir Reporte",
+                        "¿Deseas abrir el reporte ahora?"
+                );
+
+                if (abrir) {
+                    java.awt.Desktop.getDesktop().open(archivoDestino);
+                }
+            }
+
+            // Eliminar archivo temporal
+            archivoPDF.delete();
+
+        } catch (Exception e) {
+            AlertHelper.mostrarError("Error al Generar Reporte",
+                    "No se pudo generar el reporte PDF:\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Descarga reporte administrativo en Excel
+     */
+    @FXML
+    private void handleDescargarReporteExcel(ActionEvent event) {
+        try {
+            ReporteService reporteService = new ReporteService();
+            File archivoExcel = reporteService.generarReporteAdminExcel();
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Reporte Excel");
+            fileChooser.setInitialFileName("reporte_admin_" +
+                    java.time.LocalDateTime.now().format(
+                            java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+                    ) + ".xlsx");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Archivos Excel", "*.xlsx")
+            );
+
+            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
+            File archivoDestino = fileChooser.showSaveDialog(stage);
+
+            if (archivoDestino != null) {
+                java.nio.file.Files.copy(
+                        archivoExcel.toPath(),
+                        archivoDestino.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+
+                AlertHelper.mostrarExito("Reporte Generado",
+                        "El reporte Excel se guardó exitosamente en:\n" + archivoDestino.getAbsolutePath());
+
+                boolean abrir = AlertHelper.mostrarConfirmacion(
+                        "Abrir Reporte",
+                        "¿Deseas abrir el reporte ahora?"
+                );
+
+                if (abrir) {
+                    java.awt.Desktop.getDesktop().open(archivoDestino);
+                }
+            }
+
+            archivoExcel.delete();
+
+        } catch (Exception e) {
+            AlertHelper.mostrarError("Error al Generar Reporte",
+                    "No se pudo generar el reporte Excel:\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -207,6 +207,13 @@
                             <Button text="🔄 Actualizar Métricas" onAction="#handleActualizarMetricas"
                                     style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 12 40; -fx-font-weight: bold; -fx-cursor: hand;"/>
                         </HBox>
+                        <HBox spacing="15" alignment="CENTER">
+                            <Button text="📊 Descargar Reporte PDF" onAction="#handleDescargarReportePDF"
+                                    style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-padding: 12 40; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
+                            <Button text="📑 Descargar Reporte Excel" onAction="#handleDescargarReporteExcel"
+                                    style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 12 40; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                        </HBox>
                     </VBox>
                 </ScrollPane>
             </Tab>
