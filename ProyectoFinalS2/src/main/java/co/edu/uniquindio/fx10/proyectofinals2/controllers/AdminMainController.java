@@ -1,30 +1,37 @@
 package co.edu.uniquindio.fx10.proyectofinals2.controllers;
 
-import javafx.stage.FileChooser;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects.*;
-import co.edu.uniquindio.fx10.proyectofinals2.model.*;
-import co.edu.uniquindio.fx10.proyectofinals2.model.AdapterDTO.DTOAdapter;
-import co.edu.uniquindio.fx10.proyectofinals2.model.Factory.RepartidorFactory;
-import co.edu.uniquindio.fx10.proyectofinals2.services.*;
-import co.edu.uniquindio.fx10.proyectofinals2.utils.AlertHelper;
-import co.edu.uniquindio.fx10.proyectofinals2.utils.Validador;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+// ========== IMPORTS JAVA CORE ==========
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
+
+// ========== IMPORTS DEL PROYECTO ==========
+import co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects.*;
+import co.edu.uniquindio.fx10.proyectofinals2.model.*;
+import co.edu.uniquindio.fx10.proyectofinals2.model.AdapterDTO.DTOAdapter;
+import co.edu.uniquindio.fx10.proyectofinals2.services.*;
+import co.edu.uniquindio.fx10.proyectofinals2.utils.AlertHelper;
+import co.edu.uniquindio.fx10.proyectofinals2.utils.Validador;
 
 /**
  * Controlador principal del panel de administración

@@ -15,7 +15,7 @@ module co.edu.uniquindio.fx10.proyectofinals2 {
     // Dependencias adicionales de POI
     requires org.apache.commons.collections4;
     requires org.apache.commons.compress;
-
+    requires org.apache.fontbox;
     // Para abrir archivos automáticamente
     requires java.desktop;
 
@@ -33,4 +33,5 @@ module co.edu.uniquindio.fx10.proyectofinals2 {
     exports co.edu.uniquindio.fx10.proyectofinals2.dataTransferObjects;
     exports co.edu.uniquindio.fx10.proyectofinals2.utils;
     exports co.edu.uniquindio.fx10.proyectofinals2.reposytorie;
+
 }

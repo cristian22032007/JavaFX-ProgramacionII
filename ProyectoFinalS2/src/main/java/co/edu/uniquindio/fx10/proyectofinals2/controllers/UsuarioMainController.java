@@ -19,13 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
