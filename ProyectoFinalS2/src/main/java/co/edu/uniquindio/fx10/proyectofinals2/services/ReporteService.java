@@ -8,11 +8,10 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -233,79 +232,7 @@ public class ReporteService {
         return archivo;
     }
 
-    /**
-     * Genera reporte Excel de envíos del usuario
-     */
-    public File generarReporteUsuarioExcel(String idUsuario, LocalDateTime fechaInicio,
-                                           LocalDateTime fechaFin) throws IOException {
-        Usuario usuario = repositorio.getUsuarios().get(idUsuario);
-        if (usuario == null) {
-            throw new IllegalArgumentException("Usuario no encontrado");
-        }
 
-        List<Envio> envios = usuario.getEnvios().stream()
-                .filter(e -> {
-                    if (fechaInicio != null && e.getFechaCreacion().isBefore(fechaInicio)) {
-                        return false;
-                    }
-                    if (fechaFin != null && e.getFechaCreacion().isAfter(fechaFin)) {
-                        return false;
-                    }
-                    return true;
-                })
-                .collect(Collectors.toList());
-
-        File archivo = File.createTempFile("reporte_usuario_", ".xlsx");
-
-        try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("Mis Envíos");
-
-            // Estilos
-            CellStyle headerStyle = workbook.createCellStyle();
-            Font headerFont = workbook.createFont();
-            headerFont.setBold(true);
-            headerStyle.setFont(headerFont);
-
-            // Encabezados
-            Row headerRow = sheet.createRow(0);
-            String[] headers = {"ID Envío", "Origen", "Destino", "Estado",
-                    "Fecha", "Costo", "Método Pago"};
-
-            for (int i = 0; i < headers.length; i++) {
-                Cell cell = headerRow.createCell(i);
-                cell.setCellValue(headers[i]);
-                cell.setCellStyle(headerStyle);
-            }
-
-            // Datos
-            int rowNum = 1;
-            for (Envio envio : envios) {
-                Row row = sheet.createRow(rowNum++);
-
-                row.createCell(0).setCellValue(envio.getIdEnvio());
-                row.createCell(1).setCellValue(envio.getOrigen().getMunicipio().name());
-                row.createCell(2).setCellValue(envio.getDestino().getMunicipio().name());
-                row.createCell(3).setCellValue(envio.getEstado().name());
-                row.createCell(4).setCellValue(envio.getFechaCreacion().format(FORMATO_FECHA));
-
-                if (envio.getPago() != null) {
-                    row.createCell(5).setCellValue(envio.getPago().getMonto());
-                    row.createCell(6).setCellValue(envio.getPago().getMetodoPago().getTipo().name());
-                }
-            }
-
-            // Ajustar anchos
-            for (int i = 0; i < headers.length; i++) {
-                sheet.autoSizeColumn(i);
-            }
-
-            try (FileOutputStream outputStream = new FileOutputStream(archivo)) {
-                workbook.write(outputStream);
-            }
-        }
-
-        return archivo;
-    }
 
     // ========== REPORTES PARA ADMINISTRADORES ==========
 
@@ -408,29 +335,6 @@ public class ReporteService {
     /**
      * Genera reporte Excel completo del sistema
      */
-    public File generarReporteAdminExcel() throws IOException {
-        File archivo = File.createTempFile("reporte_admin_", ".xlsx");
-
-        try (Workbook workbook = new XSSFWorkbook()) {
-            // Hoja 1: Resumen
-            Sheet resumenSheet = workbook.createSheet("Resumen");
-            crearHojaResumen(workbook, resumenSheet);
-
-            // Hoja 2: Envíos
-            Sheet enviosSheet = workbook.createSheet("Todos los Envíos");
-            crearHojaEnvios(workbook, enviosSheet);
-
-            // Hoja 3: Usuarios
-            Sheet usuariosSheet = workbook.createSheet("Usuarios");
-            crearHojaUsuarios(workbook, usuariosSheet);
-
-            try (FileOutputStream outputStream = new FileOutputStream(archivo)) {
-                workbook.write(outputStream);
-            }
-        }
-
-        return archivo;
-    }
 
     // ========== MÉTODOS AUXILIARES ==========
 
@@ -449,75 +353,5 @@ public class ReporteService {
                 .mapToDouble(Pago::getMonto)
                 .sum();
     }
-
-    private void crearHojaResumen(Workbook workbook, Sheet sheet) {
-        Row row = sheet.createRow(0);
-        row.createCell(0).setCellValue("Métrica");
-        row.createCell(1).setCellValue("Valor");
-
-        Map<String, Object> stats = obtenerEstadisticasGenerales();
-        int rowNum = 1;
-        for (Map.Entry<String, Object> entry : stats.entrySet()) {
-            Row dataRow = sheet.createRow(rowNum++);
-            dataRow.createCell(0).setCellValue(entry.getKey());
-            dataRow.createCell(1).setCellValue(entry.getValue().toString());
-        }
-
-        sheet.autoSizeColumn(0);
-        sheet.autoSizeColumn(1);
-    }
-
-    private void crearHojaEnvios(Workbook workbook, Sheet sheet) {
-        Row headerRow = sheet.createRow(0);
-        String[] headers = {"ID", "Usuario", "Repartidor", "Origen", "Destino",
-                "Estado", "Fecha", "Costo"};
-
-        for (int i = 0; i < headers.length; i++) {
-            headerRow.createCell(i).setCellValue(headers[i]);
-        }
-
-        int rowNum = 1;
-        for (Envio envio : repositorio.getEnvios().values()) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(envio.getIdEnvio());
-            row.createCell(1).setCellValue(envio.getUsuario().getNombre());
-            row.createCell(2).setCellValue(envio.getRepartidor() != null ?
-                    envio.getRepartidor().getNombre() : "Sin asignar");
-            row.createCell(3).setCellValue(envio.getOrigen().getMunicipio().name());
-            row.createCell(4).setCellValue(envio.getDestino().getMunicipio().name());
-            row.createCell(5).setCellValue(envio.getEstado().name());
-            row.createCell(6).setCellValue(envio.getFechaCreacion().format(FORMATO_FECHA));
-
-            if (envio.getPago() != null) {
-                row.createCell(7).setCellValue(envio.getPago().getMonto());
-            }
-        }
-
-        for (int i = 0; i < headers.length; i++) {
-            sheet.autoSizeColumn(i);
-        }
-    }
-
-    private void crearHojaUsuarios(Workbook workbook, Sheet sheet) {
-        Row headerRow = sheet.createRow(0);
-        String[] headers = {"ID", "Nombre", "Email", "Teléfono", "Total Envíos"};
-
-        for (int i = 0; i < headers.length; i++) {
-            headerRow.createCell(i).setCellValue(headers[i]);
-        }
-
-        int rowNum = 1;
-        for (Usuario usuario : repositorio.getUsuarios().values()) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(usuario.getId());
-            row.createCell(1).setCellValue(usuario.getNombre());
-            row.createCell(2).setCellValue(usuario.getCorreo());
-            row.createCell(3).setCellValue(usuario.getTelefono());
-            row.createCell(4).setCellValue(usuario.getEnvios().size());
-        }
-
-        for (int i = 0; i < headers.length; i++) {
-            sheet.autoSizeColumn(i);
-        }
-    }
+    
 }
