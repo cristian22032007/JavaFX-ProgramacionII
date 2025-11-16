@@ -199,7 +199,7 @@ public class UsuarioMainController {
     }
 
     @FXML
-    private void handleCrearEnvio(ActionEvent event) {
+    private void handleCrearEnvio() {
         try {
             // Validar cotización
             if (costoActual <= 0 || tarifaCotizada == null) {
@@ -276,14 +276,14 @@ public class UsuarioMainController {
     }
 
     @FXML
-    private void handleLimpiar(ActionEvent event) {
+    private void handleLimpiar() {
         limpiarFormulario();
     }
 
     // ========== TAB: MIS ENVÍOS ==========
 
     @FXML
-    private void handleActualizarEnvios(ActionEvent event) {
+    private void handleActualizarEnvios() {
         actualizarTablaEnvios();
         AlertHelper.mostrarInfo("Actualizado", "Lista de envíos actualizada");
     }
@@ -612,46 +612,4 @@ public class UsuarioMainController {
         }
     }
 
-    @FXML
-    private void handleDescargarMisEnviosExcel(ActionEvent event) {
-        try {
-            ReporteService reporteService = new ReporteService();
-            File archivoExcel = reporteService.generarReporteUsuarioExcel(
-                    usuarioActual.getId(), null, null
-            );
-
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardar Reporte Excel");
-            fileChooser.setInitialFileName("mis_envios_" +
-                    java.time.LocalDateTime.now().format(
-                            java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
-                    ) + ".xlsx");
-            fileChooser.getExtensionFilters().add(
-                    new FileChooser.ExtensionFilter("Archivos Excel", "*.xlsx")
-            );
-
-            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
-            File archivoDestino = fileChooser.showSaveDialog(stage);
-
-            if (archivoDestino != null) {
-                java.nio.file.Files.copy(
-                        archivoExcel.toPath(),
-                        archivoDestino.toPath(),
-                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
-                );
-
-                AlertHelper.mostrarExito("Reporte Generado",
-                        "Tu reporte se guardó exitosamente");
-
-                if (AlertHelper.mostrarConfirmacion("Abrir", "¿Abrir ahora?")) {
-                    java.awt.Desktop.getDesktop().open(archivoDestino);
-                }
-            }
-
-            archivoExcel.delete();
-
-        } catch (Exception e) {
-            AlertHelper.mostrarError("Error", e.getMessage());
-        }
-    }
 }

@@ -48,6 +48,13 @@
             <version>5.2.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+        
+
         <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

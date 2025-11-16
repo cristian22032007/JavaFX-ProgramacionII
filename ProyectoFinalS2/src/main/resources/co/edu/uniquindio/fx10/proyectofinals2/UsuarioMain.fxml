@@ -139,9 +139,6 @@
                     <HBox spacing="15" alignment="CENTER_RIGHT">
                         <Button text="📄 Descargar Mis Envíos (PDF)" onAction="#handleDescargarMisEnviosPDF"
                                 style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
-
-                        <Button text="📊 Descargar Mis Envíos (Excel)" onAction="#handleDescargarMisEnviosExcel"
-                                style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
                     </HBox>
                 </VBox>
             </Tab>
