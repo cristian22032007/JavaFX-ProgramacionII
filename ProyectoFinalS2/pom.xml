@@ -27,33 +27,25 @@
             <version>17.0.6</version>
         </dependency>
 
-        <!-- Apache PDFBox para generación de PDFs -->
+        <!-- ========== PDFBox y sus dependencias completas ========== -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.29</version>
         </dependency>
 
-        <!-- ⭐ IMPORTANTE: FontBox es necesario para PDFBox -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>fontbox</artifactId>
             <version>2.0.29</version>
         </dependency>
 
-        <!-- Apache POI para Excel -->
+        <!-- Commons Logging (requerido por PDFBox) -->
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>5.2.3</version>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.xmlbeans</groupId>
-            <artifactId>xmlbeans</artifactId>
-            <version>5.1.1</version>
-        </dependency>
-        
 
         <!-- JUnit -->
         <dependency>

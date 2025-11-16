@@ -4,14 +4,11 @@ module co.edu.uniquindio.fx10.proyectofinals2 {
     requires javafx.fxml;
     requires java.desktop;
 
-    // PDFBox y POI - modo no-modular (compatibilidad)
+    // PDFBox - modo no-modular (compatibilidad)
     requires org.apache.pdfbox;
     requires org.apache.fontbox;
-    requires org.apache.poi.poi;
-    requires org.apache.poi.ooxml;
-    requires org.apache.xmlbeans;
-    requires org.apache.commons.collections4;
-    requires org.apache.commons.compress;
+    requires java.logging; // Requerido por PDFBox
+
 
     // Opens para reflexión JavaFX
     opens co.edu.uniquindio.fx10.proyectofinals2 to javafx.fxml;
