@@ -42,7 +42,7 @@ public class Repositorio {
             return; // Ya hay datos inicializados
         }
 
-        System.out.println("🔧 Inicializando sistema con datos por defecto...");
+        System.out.println(" Inicializando sistema con datos por defecto...");
 
         // ========== ADMINISTRADOR ==========
         Administrador adminDefault = new Administrador(
@@ -54,7 +54,7 @@ public class Repositorio {
                 "admin123"
         );
         administradores.put(adminDefault.getId(), adminDefault);
-        System.out.println("✅ Administrador creado - Usuario: admin | Contraseña: admin123");
+        System.out.println("Administrador creado - Usuario: admin | Contraseña: admin123");
 
         // ========== REPARTIDOR ==========
         Repartidor repartidorDefault = new Repartidor(
@@ -74,7 +74,7 @@ public class Repositorio {
         repartidorDefault.setEstadoDisponibilidad(EstadoDisponibilidad.ACTIVO);
 
         repartidores.put(repartidorDefault.getId(), repartidorDefault);
-        System.out.println("✅ Repartidor creado - Usuario: repartidor | Contraseña: repartidor123");
+        System.out.println("Repartidor creado - Usuario: repartidor | Contraseña: repartidor123");
 
         // ========== USUARIO ==========
         Usuario usuarioDefault = new Usuario(
@@ -140,9 +140,9 @@ public class Repositorio {
         usuarioDefault.getMetodosPago().add(metodoPago3);
 
         usuarios.put(usuarioDefault.getId(), usuarioDefault);
-        System.out.println("✅ Usuario creado - Usuario: usuario | Contraseña: usuario123");
-        System.out.println("   📍 3 direcciones agregadas");
-        System.out.println("   💳 3 métodos de pago agregados");
+        System.out.println("Usuario creado - Usuario: usuario | Contraseña: usuario123");
+        System.out.println("   3 direcciones agregadas");
+        System.out.println("   3 métodos de pago agregados");
 
         // ========== CREAR ENVÍO DE EJEMPLO ==========
         try {
@@ -198,31 +198,31 @@ public class Repositorio {
             repartidorDefault.getEnviosAsignados().add(envioEjemplo);
             envios.put(envioEjemplo.getIdEnvio(), envioEjemplo);
 
-            System.out.println("✅ Envío de ejemplo creado");
-            System.out.println("   📦 ID: " + envioEjemplo.getIdEnvio());
-            System.out.println("   📍 De: " + dir1.getAlias() + " → " + dir2.getAlias());
-            System.out.println("   🚚 Repartidor: " + repartidorDefault.getNombre());
-            System.out.println("   💰 Costo: $45,000");
-            System.out.println("   ✅ Estado: EN_RUTA");
+            System.out.println("Envío de ejemplo creado");
+            System.out.println("   ID: " + envioEjemplo.getIdEnvio());
+            System.out.println("   De: " + dir1.getAlias() + " → " + dir2.getAlias());
+            System.out.println("   Repartidor: " + repartidorDefault.getNombre());
+            System.out.println("   Costo: $45,000");
+            System.out.println("   Estado: EN_RUTA");
 
         } catch (Exception e) {
             System.err.println("⚠ Error al crear envío de ejemplo: " + e.getMessage());
         }
 
         System.out.println("\n═══════════════════════════════════════════════════════");
-        System.out.println("🎉 SISTEMA INICIALIZADO CORRECTAMENTE");
+        System.out.println("SISTEMA INICIALIZADO CORRECTAMENTE");
         System.out.println("═══════════════════════════════════════════════════════");
-        System.out.println("📋 CREDENCIALES DE ACCESO:");
+        System.out.println("CREDENCIALES DE ACCESO:");
         System.out.println("");
-        System.out.println("👤 USUARIO:");
+        System.out.println("USUARIO:");
         System.out.println("   Usuario: usuario");
         System.out.println("   Contraseña: usuario123");
         System.out.println("");
-        System.out.println("🚚 REPARTIDOR:");
+        System.out.println("REPARTIDOR:");
         System.out.println("   Usuario: repartidor");
         System.out.println("   Contraseña: repartidor123");
         System.out.println("");
-        System.out.println("🔧 ADMINISTRADOR:");
+        System.out.println("ADMINISTRADOR:");
         System.out.println("   Usuario: admin");
         System.out.println("   Contraseña: admin123");
         System.out.println("═══════════════════════════════════════════════════════\n");
