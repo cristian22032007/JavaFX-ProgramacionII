@@ -353,5 +353,5 @@ public class ReporteService {
                 .mapToDouble(Pago::getMonto)
                 .sum();
     }
-    
+
 }
