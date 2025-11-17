@@ -92,7 +92,7 @@ public class Validador {
     }
 
     /**
-     * Valida usuario y muestra alerta si es inválido
+     * Valída usuario y muestra alerta si es inválido
      * @return true si es válido, false si no
      */
     public static boolean validarUsuarioConAlerta(String usuario) {

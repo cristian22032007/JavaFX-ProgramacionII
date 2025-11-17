@@ -114,7 +114,7 @@ public class LoginController {
     private void navegarAPantallaUsuario(Usuario usuario) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/UsuarioMain.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/UsuarioMain.fxml")
             );
             Parent root = loader.load();
 
@@ -136,7 +136,7 @@ public class LoginController {
     private void navegarAPantallaRepartidor(Repartidor repartidor) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/RepartidorMain.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/RepartidorMain.fxml")
             );
             Parent root = loader.load();
 
@@ -158,7 +158,7 @@ public class LoginController {
     private void navegarAPantallaAdmin(Administrador admin) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/AdminMain.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/AdminMain.fxml")
             );
             Parent root = loader.load();
 
@@ -181,7 +181,7 @@ public class LoginController {
     private void handleIrARegistro(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/Registro.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/Registro.fxml")
             );
             Parent root = loader.load();
 
@@ -199,7 +199,7 @@ public class LoginController {
     private void handleRecuperarContrasena(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/RecuperarContrasena.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/RecuperarContrasena.fxml")
             );
             Parent root = loader.load();
 

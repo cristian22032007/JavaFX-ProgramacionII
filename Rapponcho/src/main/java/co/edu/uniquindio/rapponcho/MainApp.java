@@ -2,10 +2,9 @@ package co.edu.uniquindio.rapponcho;
 
 import co.edu.uniquindio.rapponcho.reposytorie.Repositorio;
 import javafx.application.Application;
-import javafx.fxml.FXMLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -20,7 +19,7 @@ public class MainApp extends Application {
             // Inicializar el repositorio con datos por defecto
             Repositorio.getInstancia().inicializarSistemaPorDefecto();
 
-            // Cargar el archivo FXML del Login
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/co/edu/uniquindio/rapponcho/Login.fxml")
             );

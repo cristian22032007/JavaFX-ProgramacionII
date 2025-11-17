@@ -993,7 +993,7 @@ public class RepartidorMainController {
                 }
 
                 FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/Login.fxml")
+                        getClass().getResource("/co/edu/uniquindio/rapponcho/Login.fxml")
                 );
                 Parent root = loader.load();
 
