@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <?import javafx.geometry.Insets?>
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.rapponcho.controllers.RecuperarContrasenaController"
+            prefHeight="450.0" prefWidth="500.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="50.0"
+          AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+
+        <!-- Título -->
+        <Label text="Recuperar Contraseña">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <Label text="Ingresa tu correo registrado y se generará una nueva contraseña temporal"
+               wrapText="true" textAlignment="CENTER"
+               style="-fx-text-fill: #666666;"/>
+
+        <Separator prefWidth="300.0"/>
+
+        <!-- Campo de correo -->
+        <VBox spacing="8.0" alignment="CENTER">
+            <Label text="Correo Electrónico:"/>
+            <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com"
+                       prefWidth="300.0"/>
+        </VBox>
+
+        <!-- Área de resultado -->
+        <VBox fx:id="vboxResultado" spacing="10.0" alignment="CENTER"
+              visible="false" managed="false"
+              style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-background-radius: 5;">
+
+            <Label text="✓ Contraseña temporal generada:"
+                   style="-fx-font-weight: bold; -fx-text-fill: #2e7d32;"/>
+
+            <HBox spacing="10.0" alignment="CENTER">
+                <Label text="Nueva contraseña:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblContrasenaTemp"
+                       style="-fx-font-size: 16px; -fx-text-fill: #1976d2; -fx-font-weight: bold;"/>
+                <Button text="📋" onAction="#copiarContrasena"
+                        style="-fx-background-color: transparent; -fx-cursor: hand;">
+                    <tooltip>
+                        <Tooltip text="Copiar contraseña"/>
+                    </tooltip>
+                </Button>
+            </HBox>
+
+            <Label text="(Guarda esta contraseña. Podrás cambiarla después de iniciar sesión)"
+                   wrapText="true" textAlignment="CENTER"
+                   style="-fx-text-fill: #666666; -fx-font-size: 11px;"/>
+        </VBox>
+
+        <!-- Botones -->
+        <HBox spacing="15.0" alignment="CENTER">
+            <Button fx:id="btnGenerar" text="Generar Nueva Contraseña"
+                    onAction="#generarContrasena"
+                    style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-weight: bold;"
+                    prefWidth="200.0" prefHeight="35.0"/>
+            <Button text="Volver al Login" onAction="#volverLogin"
+                    style="-fx-background-color: #757575; -fx-text-fill: white;"
+                    prefWidth="150.0" prefHeight="35.0"/>
+        </HBox>
+
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+    </VBox>
+
+</AnchorPane>

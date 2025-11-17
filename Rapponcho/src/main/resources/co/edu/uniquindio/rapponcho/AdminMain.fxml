@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.rapponcho.controllers.AdminMainController"
+            prefHeight="700.0" prefWidth="1200.0"
+            style="-fx-background-color: #f5f7fa;">
+
+    <!-- Header -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 20 30;">
+
+            <Label text="🔧 RapponCho Admin" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label fx:id="lblBienvenida" text="Panel de Administración" style="-fx-text-fill: #e0e7ff; -fx-font-size: 14px;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Cerrar Sesión" onAction="#handleCerrarSesion"
+                    style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+
+            <!-- TAB: GESTIÓN DE USUARIOS -->
+            <Tab text="👥 Usuarios">
+                <VBox spacing="20" style="-fx-padding: 30;">
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Gestión de Usuarios" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Actualizar" onAction="#handleActualizarUsuarios"
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <TableView fx:id="tableUsuarios" style="-fx-background-color: white;">
+                        <columns>
+                            <TableColumn fx:id="colUsuarioId" text="ID" prefWidth="100"/>
+                            <TableColumn fx:id="colUsuarioNombre" text="Nombre" prefWidth="200"/>
+                            <TableColumn fx:id="colUsuarioCorreo" text="Correo" prefWidth="200"/>
+                            <TableColumn fx:id="colUsuarioTelefono" text="Teléfono" prefWidth="120"/>
+                            <TableColumn fx:id="colUsuarioEnvios" text="Envíos" prefWidth="80"/>
+                            <TableColumn fx:id="colUsuarioAcciones" text="Acciones" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB: GESTIÓN DE REPARTIDORES -->
+            <Tab text="🚚 Repartidores">
+                <VBox spacing="20" style="-fx-padding: 30;">
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Gestión de Repartidores" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="➕ Nuevo Repartidor" onAction="#handleNuevoRepartidor"
+                                style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
+                        <Button text="🔄 Actualizar" onAction="#handleActualizarRepartidores"
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <TableView fx:id="tableRepartidores" style="-fx-background-color: white;">
+                        <columns>
+                            <TableColumn fx:id="colRepartidorId" text="ID" prefWidth="100"/>
+                            <TableColumn fx:id="colRepartidorNombre" text="Nombre" prefWidth="180"/>
+                            <TableColumn fx:id="colRepartidorDocumento" text="Documento" prefWidth="120"/>
+                            <TableColumn fx:id="colRepartidorTelefono" text="Teléfono" prefWidth="120"/>
+                            <TableColumn fx:id="colRepartidorEstado" text="Estado" prefWidth="120"/>
+                            <TableColumn fx:id="colRepartidorEnvios" text="Envíos" prefWidth="80"/>
+                            <TableColumn fx:id="colRepartidorAcciones" text="Acciones" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB: GESTIÓN DE ENVÍOS -->
+            <Tab text="📦 Envíos">
+                <VBox spacing="20" style="-fx-padding: 30;">
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Gestión de Envíos" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <ComboBox fx:id="cmbFiltroEstadoEnvio" promptText="Filtrar por estado"
+                                  onAction="#handleFiltrarEnvios"
+                                  style="-fx-background-color: white;"/>
+
+                        <Button text="🔄 Actualizar" onAction="#handleActualizarEnvios"
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <TableView fx:id="tableEnvios" style="-fx-background-color: white;">
+                        <columns>
+                            <TableColumn fx:id="colEnvioId" text="ID" prefWidth="120"/>
+                            <TableColumn fx:id="colEnvioUsuario" text="Usuario" prefWidth="150"/>
+                            <TableColumn fx:id="colEnvioRepartidor" text="Repartidor" prefWidth="150"/>
+                            <TableColumn fx:id="colEnvioOrigen" text="Origen" prefWidth="150"/>
+                            <TableColumn fx:id="colEnvioDestino" text="Destino" prefWidth="150"/>
+                            <TableColumn fx:id="colEnvioEstado" text="Estado" prefWidth="120"/>
+                            <TableColumn fx:id="colEnvioAcciones" text="Acciones" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB: MÉTRICAS -->
+            <Tab text="📊 Métricas">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="25" style="-fx-padding: 30;">
+
+                        <Label text="Panel de Métricas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+                        <!-- Estadísticas Generales -->
+                        <HBox spacing="20" alignment="CENTER">
+
+                            <VBox spacing="10" alignment="CENTER"
+                                  style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 12; -fx-min-width: 200;">
+                                <Label text="Total Usuarios" style="-fx-text-fill: #64748b;"/>
+                                <Label fx:id="lblTotalUsuarios" text="0"
+                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                            </VBox>
+
+                            <VBox spacing="10" alignment="CENTER"
+                                  style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 12; -fx-min-width: 200;">
+                                <Label text="Total Repartidores" style="-fx-text-fill: #64748b;"/>
+                                <Label fx:id="lblTotalRepartidores" text="0"
+                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #10b981;"/>
+                            </VBox>
+
+                            <VBox spacing="10" alignment="CENTER"
+                                  style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 12; -fx-min-width: 200;">
+                                <Label text="Total Envíos" style="-fx-text-fill: #64748b;"/>
+                                <Label fx:id="lblTotalEnvios" text="0"
+                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #f59e0b;"/>
+                            </VBox>
+
+                            <VBox spacing="10" alignment="CENTER"
+                                  style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 12; -fx-min-width: 200;">
+                                <Label text="Ingresos Totales" style="-fx-text-fill: #64748b;"/>
+                                <Label fx:id="lblIngresosTotales"
+                                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #8b5cf6;">
+                                    <text>$0.00</text>
+                                </Label>
+                            </VBox>
+                        </HBox>
+
+                        <!-- Envíos por Estado -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12;">
+                            <Label text="Envíos por Estado" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            <Separator/>
+
+                            <HBox spacing="30" alignment="CENTER">
+                                <VBox spacing="5" alignment="CENTER">
+                                    <Label text="Solicitados" style="-fx-text-fill: #64748b;"/>
+                                    <Label fx:id="lblEnviosSolicitados" text="0"
+                                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #94a3b8;"/>
+                                </VBox>
+
+                                <VBox spacing="5" alignment="CENTER">
+                                    <Label text="Asignados" style="-fx-text-fill: #64748b;"/>
+                                    <Label fx:id="lblEnviosAsignados" text="0"
+                                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #3b82f6;"/>
+                                </VBox>
+
+                                <VBox spacing="5" alignment="CENTER">
+                                    <Label text="En Ruta" style="-fx-text-fill: #64748b;"/>
+                                    <Label fx:id="lblEnviosEnRuta" text="0"
+                                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f59e0b;"/>
+                                </VBox>
+
+                                <VBox spacing="5" alignment="CENTER">
+                                    <Label text="Entregados" style="-fx-text-fill: #64748b;"/>
+                                    <Label fx:id="lblEnviosEntregados" text="0"
+                                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #10b981;"/>
+                                </VBox>
+
+                                <VBox spacing="5" alignment="CENTER">
+                                    <Label text="Incidencias" style="-fx-text-fill: #64748b;"/>
+                                    <Label fx:id="lblEnviosIncidencias" text="0"
+                                           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Top Repartidores -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12;">
+                            <Label text="🏆 Top 5 Repartidores" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            <Separator/>
+                            <ListView fx:id="listTopRepartidores" prefHeight="200"/>
+                        </VBox>
+
+                        <!-- Usuarios Más Activos -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12;">
+                            <Label text="⭐ Top 5 Usuarios Activos" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            <Separator/>
+                            <ListView fx:id="listTopUsuarios" prefHeight="200"/>
+                        </VBox>
+
+                        <HBox spacing="15" alignment="CENTER">
+                            <Button text="🔄 Actualizar Métricas" onAction="#handleActualizarMetricas"
+                                    style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 12 40; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>

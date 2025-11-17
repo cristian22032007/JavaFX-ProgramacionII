@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.rapponcho.controllers.LoginController"
+            prefHeight="700.0" prefWidth="1100.0"
+            style="-fx-background-color: #f5f7fa;">
+
+    <!-- Panel Izquierdo: Imagen/Branding -->
+    <left>
+        <VBox alignment="CENTER" spacing="30"
+              style="-fx-background-color: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);"
+              prefWidth="450">
+            <padding>
+                <Insets top="60" right="40" bottom="60" left="40"/>
+            </padding>
+
+            <!-- Logo/Icono -->
+            <VBox alignment="CENTER" spacing="15">
+                <Label text="📦" style="-fx-font-size: 80px;"/>
+                <Label text="RapponCho" textFill="white">
+                    <font>
+                        <Font name="System Bold" size="38"/>
+                    </font>
+                </Label>
+                <Label text="Envíos Urbanos Same-Day" textFill="#e0e7ff">
+                    <font>
+                        <Font size="16"/>
+                    </font>
+                </Label>
+            </VBox>
+
+            <!-- Características -->
+            <VBox spacing="25" style="-fx-padding: 40 0 0 0;">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="✓" textFill="white" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <VBox spacing="5">
+                        <Label text="Entrega el mismo día" textFill="white">
+                            <font><Font name="System Bold" size="16"/></font>
+                        </Label>
+                        <Label text="Recibe tus paquetes en horas" textFill="#c7d2fe">
+                            <font><Font size="13"/></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="✓" textFill="white" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <VBox spacing="5">
+                        <Label text="Seguimiento en tiempo real" textFill="white">
+                            <font><Font name="System Bold" size="16"/></font>
+                        </Label>
+                        <Label text="Rastrea tu paquete en cada momento" textFill="#c7d2fe">
+                            <font><Font size="13"/></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="✓" textFill="white" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <VBox spacing="5">
+                        <Label text="Tarifas transparentes" textFill="white">
+                            <font><Font name="System Bold" size="16"/></font>
+                        </Label>
+                        <Label text="Cotiza antes de enviar" textFill="#c7d2fe">
+                            <font><Font size="13"/></font>
+                        </Label>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Panel Derecho: Formulario de Login -->
+    <center>
+        <VBox alignment="CENTER" spacing="35" style="-fx-background-color: #ffffff;">
+            <padding>
+                <Insets top="80" right="80" bottom="80" left="80"/>
+            </padding>
+
+            <!-- Encabezado -->
+            <VBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="Bienvenido de nuevo" style="-fx-text-fill: #1e293b;">
+                    <font>
+                        <Font name="System Bold" size="32"/>
+                    </font>
+                </Label>
+                <Label text="Ingresa tus credenciales para continuar" style="-fx-text-fill: #64748b;">
+                    <font>
+                        <Font size="15"/>
+                    </font>
+                </Label>
+            </VBox>
+
+            <!-- Formulario -->
+            <VBox spacing="25" prefWidth="380">
+
+                <!-- Campo Usuario -->
+                <VBox spacing="8">
+                    <Label text="Usuario" style="-fx-text-fill: #334155; -fx-font-weight: bold;">
+                        <font><Font size="14"/></font>
+                    </Label>
+                    <TextField fx:id="txtUsuario" promptText="Ingresa tu usuario"
+                               style="-fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 12 16; -fx-font-size: 14px;">
+                    </TextField>
+                </VBox>
+
+                <!-- Campo Contraseña -->
+                <VBox spacing="8">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Contraseña" style="-fx-text-fill: #334155; -fx-font-weight: bold;">
+                            <font><Font size="14"/></font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Hyperlink text="¿Olvidaste tu contraseña?"
+                                   onAction="#handleRecuperarContrasena"
+                                   style="-fx-text-fill: #667eea; -fx-font-size: 12px;"/>
+                    </HBox>
+                    <PasswordField fx:id="txtContrasena" promptText="Ingresa tu contraseña"
+                                   style="-fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 12 16; -fx-font-size: 14px;">
+                    </PasswordField>
+                </VBox>
+
+                <!-- Tipo de Usuario -->
+                <VBox spacing="8">
+                    <Label text="Ingresar como" style="-fx-text-fill: #334155; -fx-font-weight: bold;">
+                        <font><Font size="14"/></font>
+                    </Label>
+                    <HBox spacing="15">
+                        <RadioButton fx:id="rbUsuario" text="Usuario" selected="true"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tipoUsuario"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbRepartidor" text="Repartidor" toggleGroup="$tipoUsuario"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
+                        <RadioButton fx:id="rbAdministrador" text="Administrador" toggleGroup="$tipoUsuario"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
+                    </HBox>
+                </VBox>
+
+
+
+                <!-- Mensaje de Error -->
+                <Label fx:id="lblError" textFill="#dc2626" wrapText="true" visible="false"
+                       style="-fx-background-color: #fee2e2; -fx-padding: 12 16; -fx-background-radius: 6; -fx-font-size: 13px;"/>
+
+                <!-- Botón Iniciar Sesión -->
+                <Button fx:id="btnIniciarSesion" text="Iniciar Sesión" onAction="#handleIniciarSesion"
+                        maxWidth="Infinity" prefHeight="48"
+                        style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;">
+                </Button>
+
+                <!-- Separador -->
+                <HBox alignment="CENTER" spacing="10">
+                    <Separator prefWidth="100" HBox.hgrow="ALWAYS"/>
+                    <Label text="o" style="-fx-text-fill: #94a3b8; -fx-font-size: 13px;"/>
+                    <Separator prefWidth="100" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <!-- Registro -->
+                <HBox alignment="CENTER" spacing="5">
+                    <Label text="¿No tienes una cuenta?" style="-fx-text-fill: #64748b; -fx-font-size: 14px;"/>
+                    <Hyperlink fx:id="linkRegistro" text="Regístrate aquí" onAction="#handleIrARegistro"
+                               style="-fx-text-fill: #667eea; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+
+            <!-- Footer -->
+            <Label text="© 2025 RapponCho. Todos los derechos reservados."
+                   style="-fx-text-fill: #94a3b8; -fx-font-size: 12px;">
+                <VBox.margin>
+                    <Insets top="30"/>
+                </VBox.margin>
+            </Label>
+        </VBox>
+    </center>
+</BorderPane>
