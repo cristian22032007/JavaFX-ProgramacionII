@@ -534,25 +534,45 @@ public class AdminMainController {
     }
 
     // ========== GESTIÓN DE ENVÍOS ==========
-
     private void asignarRepartidorAEnvio(EnvioDetalleDTO envioDTO) {
         try {
             List<Repartidor> repartidoresDisponibles = repartidorService.listarDisponibles();
-
             if (repartidoresDisponibles.isEmpty()) {
                 AlertHelper.mostrarAdvertencia("Sin Repartidores",
                         "No hay repartidores disponibles en este momento");
                 return;
             }
-
             ChoiceDialog<Repartidor> dialog = new ChoiceDialog<>(
                     repartidoresDisponibles.get(0),
                     repartidoresDisponibles
             );
+
+            // Configurar los textos del diálogo
             dialog.setTitle("Asignar Repartidor");
             dialog.setHeaderText("Asignar repartidor al envío: " + envioDTO.getIdEnvio());
             dialog.setContentText("Selecciona repartidor:");
 
+            ComboBox<Repartidor> comboBox = null;
+
+            for (javafx.scene.Node node : dialog.getDialogPane().getChildren()) {
+                if (node instanceof ComboBox) {
+                    comboBox = (ComboBox<Repartidor>) node;
+                    break;
+                }
+            }
+            if (comboBox != null) {
+                comboBox.setConverter(new javafx.util.StringConverter<Repartidor>() {
+                    @Override
+                    public String toString(Repartidor repartidor) {
+                        if (repartidor == null) return "";
+                        return repartidor.getId() + " - " + repartidor.getNombre();
+                    }
+                    @Override
+                    public Repartidor fromString(String string) {
+                        return null; // Retornar null porque no lo usamos
+                    }
+                });
+            }
             Optional<Repartidor> result = dialog.showAndWait();
             result.ifPresent(repartidor -> {
                 try {
@@ -560,6 +580,8 @@ public class AdminMainController {
                     AlertHelper.mostrarExito("Asignado",
                             "Envío asignado exitosamente a " + repartidor.getNombre());
                     actualizarTablaEnvios();
+                    actualizarTablaRepartidores();
+
                 } catch (Exception e) {
                     AlertHelper.mostrarError("Error", e.getMessage());
                 }
@@ -569,7 +591,6 @@ public class AdminMainController {
             AlertHelper.mostrarError("Error", "No se pudo asignar el repartidor: " + e.getMessage());
         }
     }
-
     private void cambiarEstadoEnvio(EnvioDetalleDTO envioDTO) {
         ChoiceDialog<EstadoEnvio> dialog = new ChoiceDialog<>(
                 EstadoEnvio.ASIGNADO,
