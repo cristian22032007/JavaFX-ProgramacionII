@@ -126,7 +126,7 @@
                     </PasswordField>
                 </VBox>
 
-                <!-- Tipo de Usuario -->
+                <!-- Tipo de Usuario - CORREGIDO -->
                 <VBox spacing="8">
                     <Label text="Ingresar como" style="-fx-text-fill: #334155; -fx-font-weight: bold;">
                         <font><Font size="14"/></font>
@@ -138,18 +138,20 @@
                                 <ToggleGroup fx:id="tipoUsuario"/>
                             </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="rbRepartidor" text="Repartidor" toggleGroup="$tipoUsuario"
-                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
-                        <RadioButton fx:id="rbAdministrador" text="Administrador" toggleGroup="$tipoUsuario"
-                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;"/>
+                        <RadioButton fx:id="rbRepartidor" text="Repartidor"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;">
+                            <toggleGroup>
+                                <fx:reference source="tipoUsuario"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbAdministrador" text="Administrador"
+                                     style="-fx-text-fill: #475569; -fx-font-size: 14px;">
+                            <toggleGroup>
+                                <fx:reference source="tipoUsuario"/>
+                            </toggleGroup>
+                        </RadioButton>
                     </HBox>
                 </VBox>
-
-
-
-                <!-- Mensaje de Error -->
-                <Label fx:id="lblError" textFill="#dc2626" wrapText="true" visible="false"
-                       style="-fx-background-color: #fee2e2; -fx-padding: 12 16; -fx-background-radius: 6; -fx-font-size: 13px;"/>
 
                 <!-- Botón Iniciar Sesión -->
                 <Button fx:id="btnIniciarSesion" text="Iniciar Sesión" onAction="#handleIniciarSesion"

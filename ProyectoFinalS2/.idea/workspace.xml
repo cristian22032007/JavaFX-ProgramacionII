@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="365958c2-e0a4-4022-9660-8de5427fff35" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="365958c2-e0a4-4022-9660-8de5427fff35" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +106,7 @@
       <updated>1763336797386</updated>
       <workItem from="1763336797937" duration="1287000" />
       <workItem from="1763338404095" duration="796000" />
-      <workItem from="1763339963303" duration="678000" />
+      <workItem from="1763339963303" duration="2444000" />
     </task>
     <servers />
   </component>
