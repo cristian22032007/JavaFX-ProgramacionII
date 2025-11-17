@@ -22,7 +22,7 @@ public class MainApp extends Application {
 
             // Cargar el archivo FXML del Login
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/co/edu/uniquindio/fx10/proyectofinals2/Login.fxml")
+                    getClass().getResource("/co/edu/uniquindio/rapponcho/Login.fxml")
             );
             Parent root = loader.load();
 
@@ -35,15 +35,6 @@ public class MainApp extends Application {
             primaryStage.setResizable(true);
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(700);
-
-            // Opcional: Agregar ícono a la aplicación
-            try {
-                primaryStage.getIcons().add(
-                        new Image(getClass().getResourceAsStream("/co/edu/uniquindio/fx10/proyectofinals2/images/logo.png"))
-                );
-            } catch (Exception e) {
-                System.out.println("No se pudo cargar el ícono de la aplicación");
-            }
 
             // Centrar la ventana en la pantalla
             primaryStage.centerOnScreen();
