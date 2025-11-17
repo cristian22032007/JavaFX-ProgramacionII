@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+//Cristian Fernando Delgado Cruz
+
 /**
  * Clase principal de la aplicación RapponCho
  * Punto de entrada del sistema de envíos urbanos
