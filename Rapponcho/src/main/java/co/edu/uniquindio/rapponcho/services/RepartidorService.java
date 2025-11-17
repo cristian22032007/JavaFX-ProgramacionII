@@ -41,9 +41,7 @@ public class RepartidorService {
         if (repartidor == null) {
             throw new Exception("Repartidor no encontrado");
         }
-
-        // Necesitarías agregar setter en Repartidor
-        // repartidor.setEstadoDisponibilidad(nuevoEstado);
+        repartidor.setEstadoDisponibilidad(nuevoEstado);
     }
 
     // ========== RF-021: Consultar envíos asignados ==========

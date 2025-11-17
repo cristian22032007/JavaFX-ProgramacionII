@@ -544,30 +544,32 @@ public class AdminMainController {
                 return;
             }
 
-            ChoiceDialog<Repartidor> dialog = new ChoiceDialog<>(
-                    repartidoresDisponibles.get(0),
-                    repartidoresDisponibles
+            // Crear lista de strings con formato "ID - Nombre"
+            List<String> opcionesRepartidores = repartidoresDisponibles.stream()
+                    .map(r -> r.getId() + " - " + r.getNombre())
+                    .collect(Collectors.toList());
+
+            // Usar ChoiceDialog con Strings formateados
+            ChoiceDialog<String> dialog = new ChoiceDialog<>(
+                    opcionesRepartidores.get(0),
+                    opcionesRepartidores
             );
             dialog.setTitle("Asignar Repartidor");
             dialog.setHeaderText("Asignar repartidor al envío: " + envioDTO.getIdEnvio());
             dialog.setContentText("Selecciona repartidor:");
 
-            // Configurar el converter para mostrar el nombre del repartidor
-            dialog.getComboBox().setConverter(new javafx.util.StringConverter<Repartidor>() {
-                @Override
-                public String toString(Repartidor repartidor) {
-                    return repartidor != null ? repartidor.getNombre() : "";
-                }
-
-                @Override
-                public Repartidor fromString(String string) {
-                    return null; // No necesitamos convertir de String a Repartidor
-                }
-            });
-
-            Optional<Repartidor> result = dialog.showAndWait();
-            result.ifPresent(repartidor -> {
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(opcionSeleccionada -> {
                 try {
+                    // Extraer el ID del string seleccionado (formato: "ID - Nombre")
+                    String idRepartidor = opcionSeleccionada.split(" - ")[0];
+
+                    // Buscar el repartidor por ID
+                    Repartidor repartidor = repartidoresDisponibles.stream()
+                            .filter(r -> r.getId().equals(idRepartidor))
+                            .findFirst()
+                            .orElseThrow(() -> new Exception("Repartidor no encontrado"));
+
                     repartidorService.asignarEnvio(repartidor.getId(), envioDTO.getIdEnvio());
                     AlertHelper.mostrarExito("Asignado",
                             "Envío asignado exitosamente a " + repartidor.getNombre());
@@ -581,45 +583,6 @@ public class AdminMainController {
             AlertHelper.mostrarError("Error", "No se pudo asignar el repartidor: " + e.getMessage());
         }
     }
-
-    /**
-     *
-     * @param envioDTO
-     
-    private void asignarRepartidorAEnvio(EnvioDetalleDTO envioDTO) {
-        try {
-            List<Repartidor> repartidoresDisponibles = repartidorService.listarDisponibles();
-
-            if (repartidoresDisponibles.isEmpty()) {
-                AlertHelper.mostrarAdvertencia("Sin Repartidores",
-                        "No hay repartidores disponibles en este momento");
-                return;
-            }
-
-            ChoiceDialog<Repartidor> dialog = new ChoiceDialog<>(
-                    repartidoresDisponibles.get(0),
-                    repartidoresDisponibles
-            );
-            dialog.setTitle("Asignar Repartidor");
-            dialog.setHeaderText("Asignar repartidor al envío: " + envioDTO.getIdEnvio());
-            dialog.setContentText("Selecciona repartidor:");
-
-            Optional<Repartidor> result = dialog.showAndWait();
-            result.ifPresent(repartidor -> {
-                try {
-                    repartidorService.asignarEnvio(repartidor.getId(), envioDTO.getIdEnvio());
-                    AlertHelper.mostrarExito("Asignado",
-                            "Envío asignado exitosamente a " + repartidor.getNombre());
-                    actualizarTablaEnvios();
-                } catch (Exception e) {
-                    AlertHelper.mostrarError("Error", e.getMessage());
-                }
-            });
-
-        } catch (Exception e) {
-            AlertHelper.mostrarError("Error", "No se pudo asignar el repartidor: " + e.getMessage());
-        }
-    }*/
 
     private void cambiarEstadoEnvio(EnvioDetalleDTO envioDTO) {
         ChoiceDialog<EstadoEnvio> dialog = new ChoiceDialog<>(

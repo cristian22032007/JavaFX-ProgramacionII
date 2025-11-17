@@ -41,4 +41,5 @@ public class Repartidor extends Persona {
     public void setEstadoDisponibilidad(EstadoDisponibilidad estadoDisponibilidad) {
         this.estadoDisponibilidad = estadoDisponibilidad;
     }
+
 }
