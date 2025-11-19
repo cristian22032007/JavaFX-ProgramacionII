@@ -956,40 +956,4 @@ public class AdminMainController {
             alert.show(); // No bloqueante
         }
     }
-
-    /**
-     * Exporta datos a consola para debugging
-     */
-    public void exportarDatosDebug() {
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("DEBUG: Estado actual del sistema");
-        System.out.println("=".repeat(60));
-
-        try {
-            System.out.println("\n📊 ESTADÍSTICAS:");
-            Map<String, Object> stats = adminService.obtenerEstadisticas();
-            stats.forEach((key, value) ->
-                    System.out.println("  " + key + ": " + value));
-
-            System.out.println("\n👥 USUARIOS:");
-            adminService.listarUsuarios().forEach(u ->
-                    System.out.println("  - " + u.getNombre() + " (" + u.getId() + ")"));
-
-            System.out.println("\n🚚 REPARTIDORES:");
-            adminService.listarRepartidores().forEach(r ->
-                    System.out.println("  - " + r.getNombre() + " [" + r.getEstadoDisponibilidad() + "]"));
-
-            System.out.println("\n📦 ENVÍOS RECIENTES:");
-            adminService.listarEnvios().stream()
-                    .limit(5)
-                    .forEach(e -> System.out.println(
-                            "  - " + e.getIdEnvio() + " [" + e.getEstado() + "]"));
-
-        } catch (Exception e) {
-            System.err.println("Error en exportación debug: " + e.getMessage());
-        }
-
-        System.out.println("\n" + "=".repeat(60) + "\n");
-    }
-
-    }
+}
