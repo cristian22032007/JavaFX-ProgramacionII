@@ -1,8 +1,5 @@
 package co.edu.uniquindio.rapponcho.controllers;
 
-import javafx.stage.FileChooser;
-
-import java.io.File;
 import co.edu.uniquindio.rapponcho.dataTransferObjects.*;
 import co.edu.uniquindio.rapponcho.model.*;
 import co.edu.uniquindio.rapponcho.model.AdapterDTO.DTOAdapter;
@@ -84,13 +81,11 @@ public class UsuarioMainController {
     @FXML
     private ListView<String> listMetodosPago;
 
-    // Servicios
     private final UsuarioService usuarioService;
     private final EnvioService envioService;
     private final TarifaService tarifaService;
     private final PagoService pagoService;
 
-    // Estado
     private Usuario usuarioActual;
     private ITarifa tarifaCotizada;
     private double costoActual = 0;
@@ -112,8 +107,6 @@ public class UsuarioMainController {
         lblBienvenida.setText("Bienvenido, " + usuario.getNombre());
         cargarDatosUsuario();
     }
-
-    // ========== CONFIGURACIÓN ==========
 
     private void configurarTablas() {
         colIdEnvio.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIdEnvio()));
@@ -160,7 +153,6 @@ public class UsuarioMainController {
         actualizarTablaEnvios();
     }
 
-    // ========== TAB: NUEVO ENVÍO ==========
 
     @FXML
     private void handleCotizar(ActionEvent event) {
@@ -330,8 +322,6 @@ public class UsuarioMainController {
         }
     }
 
-    // ========== TAB: PERFIL ==========
-
     @FXML
     private void handleActualizarPerfil(ActionEvent event) {
         try {
@@ -374,8 +364,6 @@ public class UsuarioMainController {
     private void handleAgregarMetodoPago(ActionEvent event) {
         mostrarDialogoMetodoPago();
     }
-
-    // ========== DIÁLOGOS ==========
 
     private void mostrarDialogoDireccion() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -487,8 +475,6 @@ public class UsuarioMainController {
             }
         }
     }
-
-    // ========== UTILIDADES ==========
 
     private void actualizarListaDirecciones() {
         List<String> direcciones = usuarioActual.getDirecciones().stream()

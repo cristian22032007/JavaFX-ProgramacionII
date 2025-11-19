@@ -1,6 +1,5 @@
 package co.edu.uniquindio.rapponcho.dataTransferObjects;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * DTO para la información de tarifas
@@ -15,7 +14,6 @@ public class TarifaDTO {
     private double costoTotal;
     private String descripcion;
 
-    // Información adicional para cálculos
     private double distanciaKm;
     private double pesoKg;
     private double volumenM3;
@@ -36,7 +34,6 @@ public class TarifaDTO {
         this.volumenM3 = volumenM3;
     }
 
-    // Getters
     public String getIdTarifa() { return idTarifa; }
     public double getTarifaBase() { return tarifaBase; }
     public double getCostoPorKm() { return costoPorKm; }
@@ -48,30 +45,19 @@ public class TarifaDTO {
     public double getPesoKg() { return pesoKg; }
     public double getVolumenM3() { return volumenM3; }
 
-    /**
-     * Calcula el costo por distancia
-     */
     public double getCostoDistancia() {
         return distanciaKm * costoPorKm;
     }
 
-    /**
-     * Calcula el costo por peso
-     */
     public double getCostoPeso() {
         return pesoKg * costoPorKg;
     }
 
-    /**
-     * Calcula el costo por volumen
-     */
     public double getCostoVolumen() {
         return volumenM3 * costoPorM3;
     }
 
-    /**
-     * Genera un desglose detallado de la tarifa
-     */
+
     public String getDesglose() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Tarifa base: $%.2f\n", tarifaBase));

@@ -18,7 +18,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Inicializar el repositorio con datos por defecto
             Repositorio.getInstancia().inicializarSistemaPorDefecto();
 
 
@@ -27,20 +26,15 @@ public class MainApp extends Application {
             );
             Parent root = loader.load();
 
-            // Crear la escena
             Scene scene = new Scene(root);
 
-            // Configurar el Stage (ventana principal)
             primaryStage.setTitle("RapponCho - Envíos Urbanos Same-Day");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
             primaryStage.setMinWidth(800);
             primaryStage.setMinHeight(700);
-
-            // Centrar la ventana en la pantalla
             primaryStage.centerOnScreen();
 
-            // Mostrar la ventana
             primaryStage.show();
 
             System.out.println("Aplicación RapponCho iniciada correctamente");
@@ -50,7 +44,6 @@ public class MainApp extends Application {
             System.err.println("Error al iniciar la aplicación:");
             e.printStackTrace();
 
-            // Mostrar alerta de error
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
                     javafx.scene.control.Alert.AlertType.ERROR
             );

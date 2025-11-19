@@ -765,13 +765,6 @@ public class AdminMainController {
     // ========== MÉTODOS AUXILIARES ==========
 
     /**
-     * Formatea un número para mostrar en la UI
-     */
-    private String formatearNumero(int numero) {
-        return String.format("%,d", numero);
-    }
-
-    /**
      * Formatea una cantidad de dinero
      */
     private String formatearDinero(double cantidad) {
@@ -864,22 +857,6 @@ public class AdminMainController {
         }
         return true;
     }
-
-    /**
-     * Registra una acción del administrador en el log
-     */
-    private void registrarAccion(String accion, String detalles) {
-        System.out.println(String.format(
-                "[ADMIN] %s - %s: %s",
-                java.time.LocalDateTime.now(),
-                adminActual.getNombre(),
-                accion
-        ));
-        if (detalles != null && !detalles.isEmpty()) {
-            System.out.println("  Detalles: " + detalles);
-        }
-    }
-
     /**
      * Calcula el porcentaje de envíos entregados exitosamente
      */
@@ -900,8 +877,6 @@ public class AdminMainController {
      * Obtiene el tiempo promedio de entrega (simulado)
      */
     private double calcularTiempoPromedioEntrega() {
-        // En una implementación real, esto calcularía el tiempo real
-        // entre fechaCreacion y fechaEntrega de los envíos completados
         return 4.5; // Horas simuladas
     }
 

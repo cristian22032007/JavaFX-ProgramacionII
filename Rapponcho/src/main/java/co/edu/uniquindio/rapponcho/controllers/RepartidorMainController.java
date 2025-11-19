@@ -34,7 +34,6 @@ import java.util.stream.Collectors;
  */
 public class RepartidorMainController {
 
-    // ========== HEADER ==========
     @FXML private Label lblBienvenida;
     @FXML private Label lblEstadoActual;
     @FXML private Button btnCambiarEstado;
@@ -42,7 +41,6 @@ public class RepartidorMainController {
     @FXML private Label lblCapacidadMaxima;
     @FXML private ProgressBar progressCapacidad;
 
-    // ========== TAB MIS ENVÍOS ==========
     @FXML private ComboBox<EstadoEnvio> cmbFiltroEstado;
     @FXML private TableView<EnvioDetalleDTO> tableEnvios;
     @FXML private TableColumn<EnvioDetalleDTO, String> colIdEnvio;
@@ -57,17 +55,14 @@ public class RepartidorMainController {
     @FXML private Label lblEntregadosHoy;
     @FXML private Label lblTotalEntregados;
 
-    // ========== TAB ZONAS ==========
     @FXML private VBox vboxZonas;
     @FXML private GridPane gridZonasDisponibles;
 
-    // ========== TAB INCIDENCIAS ==========
     @FXML private ComboBox<String> cmbEnvioIncidencia;
     @FXML private ComboBox<String> cmbTipoIncidencia;
     @FXML private TextArea txtDescripcionIncidencia;
     @FXML private ListView<String> listIncidencias;
 
-    // ========== TAB PERFIL ==========
     @FXML private Label lblPerfilId;
     @FXML private TextField txtPerfilNombre;
     @FXML private Label lblPerfilDocumento;
@@ -81,12 +76,10 @@ public class RepartidorMainController {
     @FXML private Label lblCapacidadSeleccionada;
     @FXML private CheckBox chkAsignacionAutomatica;
 
-    // ========== SERVICIOS ==========
     private final RepartidorService repartidorService;
     private final EnvioService envioService;
     private final Repositorio repositorio;
 
-    // ========== ESTADO ==========
     private Repartidor repartidorActual;
     private int capacidadMaxima = 10;
     private boolean asignacionAutomatica = true;
@@ -113,7 +106,6 @@ public class RepartidorMainController {
         iniciarActualizacionAutomatica();
     }
 
-    // ========== CONFIGURACIÓN ==========
 
     private void configurarTablasEnvios() {
         colIdEnvio.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIdEnvio()));
@@ -128,7 +120,6 @@ public class RepartidorMainController {
         colFecha.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getFechaCreacion()));
 
-        // Botones de acción
         colAcciones.setCellFactory(col -> new TableCell<>() {
             private final Button btnIniciar = new Button("🚀 Iniciar");
             private final Button btnEntregar = new Button("✅ Entregar");
