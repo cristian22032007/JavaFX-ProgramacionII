@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="co.edu.uniquindio.parcial3.MedicoController"
+            prefHeight="400.0" prefWidth="350.0"
+            style="-fx-background-color: #f5f7fa;">
+
+    <!-- Header -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 15 25;">
+
+            <Label text="Medico" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Label fx:id="lblBienvenida" text="Panel de medicina" style="-fx-text-fill: #e0e7ff; -fx-font-size: 10px;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Lobby" onAction="#CerrarSesion"
+                    style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 5 15; -fx-cursor: hand; -fx-font-size: 11px;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+
+            <!-- TAB: GESTIÓN DE USUARIOS -->
+            <Tab text="Pacientes">
+                <VBox spacing="15" style="-fx-padding: 15;">
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Gestion Citas" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Actualizar" onAction="#ActualizarCitas"
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand; -fx-font-size: 11px;"/>
+                    </HBox>
+
+                    <TableView fx:id="tablePacientes" style="-fx-background-color: white;">
+                        <columns>
+                            <TableColumn fx:id="FechaId" text="Fecha" prefWidth="75"/>
+                            <TableColumn fx:id="HoraId" text="Hora" prefWidth="75"/>
+                            <TableColumn fx:id="PrecioId" text="Precio" prefWidth="75"/>
+                            <TableColumn fx:id="EspecializacionId" text="Especialización" prefWidth="94"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>
